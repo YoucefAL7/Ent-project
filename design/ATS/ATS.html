@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espace ATS - USTHB</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #e6ddfb;
+      color: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #1a1a5e;
+      color: #fff;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5%;
+      flex-wrap: wrap;
+    }
+
+    .illustration-container {
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+      animation: fadeZoomIn 1s ease forwards;
+    }
+
+    .illustration-container::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      background-color: #2e0854; /* بنفسجي داكن */
+      border-radius: 50%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .illustration {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .illustration-container:hover .illustration {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeZoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .sidebar {
+      background-color: #f5f4fe;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 260px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #362d7e;
+      text-align: center;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 0;
+      color: #1a1a2e;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item i {
+      margin-right: 10px;
+      color: #7b2cbf;
+    }
+
+    .menu-item span {
+      flex: 1;
+    }
+
+    .menu-item:hover {
+      color: #7b2cbf;
+    }
+
+    .welcome {
+      flex: 1;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .welcome h1 {
+      font-size: 2rem;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+    }
+
+    .welcome p {
+      color: #555;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .sidebar {
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      .illustration-container {
+        max-width: 300px;
+        margin: 1rem 0;
+      }
+
+      .illustration-container::before {
+        width: 220px;
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>Espace Numérique de Travail – USTHB</div>
+    <div>ATS</div>
+  </header>
+
+  <main>
+    <!-- رسالة ترحيب على اليسار -->
+    <div class="welcome">
+      <h1>Bienvenue à votre espace ATS</h1>
+      <p>Aucune nouvelle annonce.</p>
+    </div>
+
+    <!-- صورة المسؤول على اليمين -->
+    <div class="illustration-container">
+      <img src="admin-illustration.png" alt="Responsable administratif" class="illustration" />
+    </div>
+
+    <!-- القائمة في اليمين -->
+    <div class="sidebar">
+      <div class="menu-title">Menu</div>
+      <a href="#" class="menu-item"><i class="fas fa-user"></i><span>Voir le profil</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-wifi"></i><span>Compte Wifi</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-folder-open"></i><span>Dossier csf</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-database"></i><span>Accès Proquest</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-cogs"></i><span>Techniques de l’ingénieur</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-gavel"></i><span>Textes Règlementaires</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-flask"></i><span>Stage scientifique</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-briefcase"></i><span>Stage de perfectionnement</span></a>
+    </div>
+  </main>
+
+</body>
+</html>

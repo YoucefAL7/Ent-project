@@ -1,0 +1,205 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENT USTHB</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-color: #0d47a1;
+      --header-color: #062a70;
+      --text-color: #ffffff;
+      --card-bg: #e6f0fa;
+      --card-text: #003566;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --header-color: #1e1e1e;
+      --text-color: #ffffff;
+      --card-bg: #1f1f1f;
+      --card-text: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    header {
+      background-color: var(--header-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      color: var(--card-text);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--card-text);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    .illustration {
+      max-width: 400px;
+      width: 100%;
+      align-self: center;
+      animation: zoomIn 1.5s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .illustration {
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>Espace Numérique de Travail – USTHB</div>
+    <div>
+      <i class="fas fa-moon theme-toggle" id="toggleTheme" title="Changer le thème"></i>
+    </div>
+  </header>
+
+  <main>
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-user-graduate"></i>
+        <div class="card-title">Mon Cursus</div>
+        <div class="highlight">(Section et groupe)</div>
+      </div>
+      <div class="card">
+        <i class="fas fa-bullhorn"></i>
+        <div class="card-title">Annonces</div>
+      </div>
+      <div class="card">
+        <i class="fas fa-book-open"></i>
+        <div class="card-title">Doc. Pédagogiques</div>
+      </div>
+      <div class="card">
+        <i class="fas fa-university"></i>
+        <div class="card-title">Bibliothèque EBSCO</div>
+      </div>
+      <div class="card">
+        <i class="fas fa-university"></i>
+        <div class="card-title">Bibliothèque</div>
+      </div>
+      <div class="card">
+        <i class="fas fa-check-circle"></i>
+        <div class="card-title">Résultat Orientation</div>
+      </div>
+    </div>
+
+    <img src="student-colored.png" alt="Illustration étudiant" class="illustration" />
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    function setTheme(theme) {
+      if (theme === "dark") {
+        body.classList.add("dark");
+        toggleBtn.classList.remove("fa-moon");
+        toggleBtn.classList.add("fa-sun");
+      } else {
+        body.classList.remove("dark");
+        toggleBtn.classList.remove("fa-sun");
+        toggleBtn.classList.add("fa-moon");
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      setTheme(isDark ? "dark" : "light");
+    });
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+  </script>
+
+</body>
+</html>
