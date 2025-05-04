@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Enseignant - USTHB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      /* Light Mode Variables - Teal Theme */
+      --primary: #00838f;
+      --primary-dark: #006064;
+      --secondary: #26a69a;
+      --accent: #4db6ac;
+      --bg-primary: #f0f7f7;
+      --bg-secondary: #ffffff;
+      --bg-accent: #e0f2f1;
+      --text-primary: #1e293b;
+      --text-secondary: #334155;
+      --text-tertiary: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 131, 143, 0.1), 0 8px 10px -6px rgba(0, 131, 143, 0.08);
+      --shadow-sm: 0 4px 6px -1px rgba(0, 131, 143, 0.06), 0 2px 4px -1px rgba(0, 131, 143, 0.03);
+      --header-bg: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      --card-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Mode Variables */
+      --primary: #4dd0e1;
+      --primary-dark: #00acc1;
+      --secondary: #80cbc4;
+      --accent: #b2dfdb;
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-accent: #164e63;
+      --text-primary: #f8fafc;
+      --text-secondary: #e2e8f0;
+      --text-tertiary: #cbd5e1;
+      --border: #334155;
+      --shadow: 0 10px 25px -5px rgba(0, 131, 143, 0.2), 0 8px 10px -6px rgba(0, 131, 143, 0.15);
+      --shadow-sm: 0 4px 6px -1px rgba(0, 131, 143, 0.15), 0 2px 4px -1px rgba(0, 131, 143, 0.1);
+      --header-bg: linear-gradient(135deg, #164e63 0%, #083344 100%);
+      --card-gradient: linear-gradient(135deg, #00838f 0%, #26a69a 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Modern Header */
+    header {
+      background: var(--header-bg);
+      color: #ffffff;
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-role {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(30deg);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Modern Sidebar */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-card {
+      background-color: var(--bg-secondary);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sidebar-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      padding: 1.25rem 1.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-gradient);
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .section-title i {
+      color: #ffffff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0.5rem 0;
+      overflow: hidden;
+      max-height: 500px;
+      transition: max-height 0.4s ease;
+    }
+
+    .sidebar ul.collapsed {
+      max-height: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      display: flex;
+      align-items: center;
+      padding: 0.875rem 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background-color: var(--bg-accent);
+      z-index: -1;
+      transition: width 0.3s ease;
+    }
+
+    .sidebar li:hover {
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .sidebar li:hover::before {
+      width: 100%;
+    }
+
+    .sidebar li i {
+      width: 20px;
+      margin-right: 12px;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar li:hover i {
+      transform: translateX(2px);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      background-color: var(--bg-secondary);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+    }
+
+    .main-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tabs-container {
+      margin-bottom: 2rem;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: var(--bg-accent);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--bg-primary);
+    }
+
+    tr:hover {
+      background-color: var(--bg-accent);
+    }
+
+    /* Ajouter ceci dans votre section de style */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .student-table th:nth-child(1), /* Matricule */
+    .student-table td:nth-child(1) {
+      width: 80px;
+    }
+
+    .student-table th:nth-child(4), /* Email */
+    .student-table td:nth-child(4) {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .student-table th:nth-child(5), /* TD */
+    .student-table th:nth-child(6), /* TP */
+    .student-table th:nth-child(7), /* Examen */
+    .student-table th:nth-child(8), /* Moyenne */
+    .student-table td:nth-child(5),
+    .student-table td:nth-child(6),
+    .student-table td:nth-child(7),
+    .student-table td:nth-child(8) {
+      width: 70px;
+      text-align: center;
+    }
+
+    .action-btn {
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      color: white;
+      background: var(--primary);
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: rgb(16, 185, 129);
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: rgb(245, 158, 11);
+    }
+
+    .badge-danger {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: rgb(239, 68, 68);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 131, 143, 0.1);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: #ffffff;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: var(--bg-primary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .profile-container {
+      position: relative;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2rem;
+    }
+
+    .teacher-illustration {
+      width: 200px;
+      height: auto;
+      position: relative;
+      z-index: 2;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .circle-bg {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: var(--card-gradient);
+      border-radius: 50%;
+      z-index: 1;
+      opacity: 0.2;
+    }
+
+    .welcome-message {
+      background-color: var(--bg-accent);
+      padding: 1rem;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .welcome-message h3 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #ef4444;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    /* Calendar styles */
+    .calendar {
+      width: 100%;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .calendar-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .calendar-header button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background-color: var(--bg-secondary);
+    }
+
+    .calendar-grid div {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .calendar-grid .weekday {
+      font-weight: 600;
+      background: var(--bg-accent);
+      color: var(--text-primary);
+    }
+
+    .calendar-grid .day {
+      position: relative;
+      min-height: 80px;
+      cursor: pointer;
+    }
+
+    .calendar-grid .day:hover {
+      background-color: var(--bg-accent);
+    }
+
+    .calendar-grid .day.today {
+      background-color: rgba(0, 131, 143, 0.1);
+      font-weight: bold;
+    }
+
+    .calendar-grid .day.has-event::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .footer-link {
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive Adaptations */
+    @media (max-width: 1024px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+      }
+      
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .main-content {
+        padding: 1.5rem;
+      }
+
+      .calendar-grid .day {
+        min-height: 60px;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .user-role {
+        display: none;
+      }
+      
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs {
+        flex-wrap: wrap;
+      }
+
+      .tab {
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo">Espace Numérique de Travail – USTHB</div>
+    </div>
+    <div class="user-section">
+      <div class="user-info">
+        <div class="user-role">Professeur</div>
+        <div class="user-name">Dr. Amrani Karim</div>
+      </div>
+      <div class="user-avatar">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar gauche -->
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="section-title" onclick="toggleSection(this)">
+          <i class="fas fa-bell"></i> Notifications <span class="notification-badge">3</span>
+        </div>
+        <ul>
+          <li><i class="fas fa-star"></i>Convocation Conseil Scientifique</li>
+          <li><i class="fas fa-exclamation-circle"></i>Soumission notes examen</li>
+          <li><i class="fas fa-graduation-cap"></i>Soutenance Doctorat - Jury</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="section-title" onclick="toggleSection(this)">
+          <i class="fas fa-chalkboard-teacher"></i> Pédagogie
+        </div>
+        <ul>
+          <li><i class="fas fa-users"></i>Liste des étudiants</li>
+          <li><i class="fas fa-clipboard-list"></i>Gestion des notes</li>
+          <li><i class="fas fa-tasks"></i>Emploi du temps</li>
+          <li><i class="fas fa-book-open"></i>Cours et supports</li>
+          <li><i class="fas fa-file-alt"></i>Plans de cours</li>
+          <li><i class="fas fa-award"></i>Système d'évaluation</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="section-title" onclick="toggleSection(this)">
+          <i class="fas fa-book"></i> Recherche & Publications
+        </div>
+        <ul>
+          <li><i class="fas fa-microscope"></i>Projets de recherche</li>
+          <li><i class="fas fa-book"></i>Publications récentes</li>
+          <li><i class="fas fa-users"></i>Encadrement doctoral</li>
+          <li><i class="fas fa-database"></i>Accès Proquest</li>
+          <li><i class="fas fa-flask"></i>Laboratoire</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="section-title" onclick="toggleSection(this)">
+          <i class="fas fa-cogs"></i> Administration
+        </div>
+        <ul>
+          <li><i class="fas fa-gift"></i>Prime de rendement</li>
+          <li><i class="fas fa-file-invoice"></i>Relevés de service</li>
+          <li><i class="fas fa-file-signature"></i>Attestations</li>
+          <li><i class="fas fa-calendar-check"></i>Absences et congés</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      
+      <div class="welcome-message">
+        <h3>Bienvenue, Dr. Amrani</h3>
+        <p>Vous avez 3 notifications non lues et 2 tâches en attente. Semestre actuel : S2 2024-2025.</p>
+      </div>
+
+      <div class="tabs-container">
+        <div class="tabs">
+          <div class="tab active" data-tab="dashboard">Tableau de bord</div>
+          <div class="tab" data-tab="profile">Profil</div>
+          <div class="tab" data-tab="students">Étudiants</div>
+          <div class="tab" data-tab="calendar">Calendrier</div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div class="tab-content active" id="dashboard-content">
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div class="stat-value">156</div>
+              <div class="stat-label">Étudiants</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-clipboard-check"></i></div>
+              <div class="stat-value">4</div>
+              <div class="stat-label">Cours</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-clock"></i></div>
+              <div class="stat-value">18</div>
+              <div class="stat-label">Heures/Semaine</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="stat-value">5</div>
+              <div class="stat-label">Doctorants</div>
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <th>Cours</th>
+              <th>Groupe</th>
+              <th>Jour</th>
+              <th>Horaire</th>
+              <th>Salle</th>
+            </tr>
+            <tr>
+              <td>Bases de données avancées</td>
+              <td>M1 Info - G1</td>
+              <td>Dimanche</td>
+              <td>08:30 - 10:00</td>
+              <td>B219</td>
+            </tr>
+            <tr>
+              <td>Intelligence artificielle</td>
+              <td>M2 IA - G2</td>
+              <td>Lundi</td>
+              <td>13:00 - 14:30</td>
+              <td>A105</td>
+            </tr>
+            <tr>
+              <td>Algorithmique</td>
+              <td>L2 Info - G3</td>
+              <td>Mardi</td>
+              <td>10:15 - 11:45</td>
+              <td>C301</td>
+            </tr>
+            <tr>
+              <td>Data Mining</td>
+              <td>M2 STIC - G1</td>
+              <td>Jeudi</td>
+              <td>14:45 - 16:15</td>
+              <td>LAB 3</td>
+            </tr>
+          </table>
+
+          <h3 style="margin-bottom: 1rem; color: var(--primary);">Tâches en attente</h3>
+          <table>
+            <tr>
+              <th>Tâche</th>
+              <th>Date limite</th>
+              <th>Statut</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>Soumission des notes - Examen final</td>
+              <td>28/04/2025</td>
+              <td><span class="badge badge-warning">En attente</span></td>
+              <td><button class="action-btn"><i class="fas fa-edit"></i> Éditer</button></td>
+            </tr>
+            <tr>
+              <td>Rapport d'encadrement doctoral</td>
+              <td>05/05/2025</td>
+              <td><span class="badge badge-warning">En attente</span></td>
+              <td><button class="action-btn"><i class="fas fa-edit"></i> Éditer</button></td>
+            </tr>
+            <tr>
+              <td>Plan de cours - Semestre prochain</td>
+              <td>15/05/2025</td>
+              <td><span class="badge badge-danger">À venir</span></td>
+              <td><button class="action-btn"><i class="fas fa-plus"></i> Créer</button></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content" id="profile-content">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" class="form-control" value="Amrani">
+            </div>
+            <div class="form-group">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" class="form-control" value="Karim">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" value="k.amrani@usthb.dz">
+            </div>
+            <div class="form-group">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" class="form-control" value="+213 555 123 456">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="specialite">Spécialité</label>
+            <input type="text" id="specialite" class="form-control" value="Informatique - Intelligence Artificielle">
+          </div>
+
+          <div class="form-group">
+            <label for="grade">Grade</label>
+            <select id="grade" class="form-control">
+              <option value="professeur">Professeur</option>
+              <option value="mc_a">Maître de Conférences A</option>
+              <option value="mc_b">Maître de Conférences B</option>
+              <option value="maa">Maître Assistant A</option>
+              <option value="mab">Maître Assistant B</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="bio">Biographie</label>
+            <textarea id="bio" class="form-control" rows="4">Dr. Karim Amrani est professeur d'informatique spécialisé en intelligence artificielle et bases de données à l'USTHB. Il a obtenu son doctorat en 2008 et dirige actuellement le laboratoire de recherche en systèmes d'information et aide à la décision.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Changer le mot de passe</label>
+            <input type="password" id="password" class="form-control" placeholder="Nouveau mot de passe">
+          </div>
+
+          <div class="form-group">
+            <label for="password-confirm">Confirmer le mot de passe</label>
+            <input type="password" id="password-confirm" class="form-control" placeholder="Confirmer le mot de passe">
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <button class="btn"><i class="fas fa-save"></i> Enregistrer les modifications</button>
+            <button class="btn btn-secondary"><i class="fas fa-undo"></i> Annuler</button>
+          </div>
+        </div>
+
+        <!-- Students Tab -->
+        <div class="tab-content" id="students-content">
+          <div class="form-group">
+            <label for="course-select">Sélectionner un cours</label>
+            <select id="course-select" class="form-control">
+              <option value="bda">Bases de données avancées (M1 Info - G1)</option>
+              <option value="ia">Intelligence artificielle (M2 IA - G2)</option>
+              <option value="algo">Algorithmique (L2 Info - G3)</option>
+              <option value="dm">Data Mining (M2 STIC - G1)</option>
+            </select>
+          </div>
+
+        <div class="table-container">
+          <table class="student-table">
+            <tr>
+              <th>Matricule</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>TD</th>
+              <th>TP</th>
+              <th>Examen</th>
+              <th>Moyenne</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td>202301</td>
+              <td>Benali</td>
+              <td>Amel</td>
+              <td>a.benali@etu.usthb.dz</td>
+              <td>15.50</td>
+              <td>14.00</td>
+              <td>16.00</td>
+              <td>15.38</td>
+              <td>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                <button class="action-btn"><i class="fas fa-file-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>202302</td>
+              <td>Boudiaf</td>
+              <td>Samir</td>
+              <td>s.boudiaf@etu.usthb.dz</td>
+              <td>12.75</td>
+              <td>13.50</td>
+              <td>11.00</td>
+              <td>12.06</td>
+              <td>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                <button class="action-btn"><i class="fas fa-file-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>202303</td>
+              <td>Cherif</td>
+              <td>Lina</td>
+              <td>l.cherif@etu.usthb.dz</td>
+              <td>17.00</td>
+              <td>16.50</td>
+              <td>18.25</td>
+              <td>17.44</td>
+              <td>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                <button class="action-btn"><i class="fas fa-file-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>202304</td>
+              <td>Djaziri</td>
+              <td>Kamel</td>
+              <td>k.djaziri@etu.usthb.dz</td>
+              <td>10.00</td>
+              <td>12.25</td>
+              <td>09.50</td>
+              <td>10.31</td>
+              <td>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                <button class="action-btn"><i class="fas fa-file-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>202305</td>
+              <td>Ferroukhi</td>
+              <td>Yasmine</td>
+              <td>y.ferroukhi@etu.usthb.dz</td>
+              <td>14.00</td>
+              <td>13.75</td>
+              <td>15.50</td>
+              <td>14.56</td>
+              <td>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                <button class="action-btn"><i class="fas fa-file-alt"></i></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+            <button class="btn"><i class="fas fa-file-excel"></i> Exporter Excel</button>
+            <button class="btn"><i class="fas fa-paper-plane"></i> Soumettre les notes</button>
+          </div>
+        </div>
+
+        <!-- Calendar Tab -->
+        <div class="tab-content" id="calendar-content">
+          <div class="calendar">
+            <div class="calendar-header">
+              <button><i class="fas fa-chevron-left"></i></button>
+              <h3>Avril 2025</h3>
+              <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-grid">
+              <div class="weekday">Dim</div>
+              <div class="weekday">Lun</div>
+              <div class="weekday">Mar</div>
+              <div class="weekday">Mer</div>
+              <div class="weekday">Jeu</div>
+              <div class="weekday">Ven</div>
+              <div class="weekday">Sam</div>
+              
+              <div class="day"></div>
+              <div class="day"></div>
+              <div class="day">1</div>
+              <div class="day">2</div>
+              <div class="day">3</div>
+              <div class="day">4</div>
+              <div class="day">5</div>
+              
+              <div class="day">6</div>
+              <div class="day">7</div>
+              <div class="day">8</div>
+              <div class="day">9</div>
+              <div class="day">10</div>
+              <div class="day">11</div>
+              <div class="day">12</div>
+              
+              <div class="day">13</div>
+              <div class="day">14</div>
+              <div class="day">15</div>
+              <div class="day">16</div>
+              <div class="day">17</div>
+              <div class="day">18</div>
+              <div class="day">19</div>
+              
+              <div class="day">20</div>
+              <div class="day">21</div>
+              <div class="day">22</div>
+              <div class="day today">23</div>
+              <div class="day has-event">24</div>
+              <div class="day has-event">25</div>
+              <div class="day">26</div>
+              
+              <div class="day">27</div>
+              <div class="day has-event">28</div>
+              <div class="day">29</div>
+              <div class="day">30</div>
+              <div class="day"></div>
+              <div class="day"></div>
+              <div class="day"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-title">Titre de l'évènement</label>
+              <input type="text" id="event-title" class="form-control" placeholder="Ajouter un titre">
+            </div>
+            <div class="form-group">
+              <label for="event-date">Date</label>
+              <input type="date" id="event-date" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-start">Heure de début</label>
+              <input type="time" id="event-start" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="event-end">Heure de fin</label>
+              <input type="time" id="event-end" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="event-description">Description</label>
+            <textarea id="event-description" class="form-control" rows="3" placeholder="Description de l'évènement"></textarea>
+          </div>
+
+          <div style="text-align: center; margin-top: 1rem;">
+            <button class="btn"><i class="fas fa-plus"></i> Ajouter l'évènement</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB</p>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Mentions légales</a>
+      <a href="#" class="footer-link">Confidentialité</a>
+      <a href="#" class="footer-link">Contact</a>
+      <a href="#" class="footer-link">Support technique</a>
+    </div>
+  </footer>
+
+  <script>
+    // Fonction pour basculer le thème (clair/sombre)
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      const icon = themeToggle.querySelector('i');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    });
+
+    // Fonction pour afficher/masquer les sections du menu
+    function toggleSection(element) {
+      const sectionList = element.nextElementSibling;
+      sectionList.classList.toggle('collapsed');
+    }
+
+    // Gestion des onglets
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Supprime la classe active de tous les onglets
+        tabs.forEach(t => t.classList.remove('active'));
+        // Ajoute la classe active à l'onglet cliqué
+        tab.classList.add('active');
+        
+        // Cache tous les contenus d'onglets
+        tabContents.forEach(content => content.classList.remove('active'));
+        // Affiche le contenu correspondant à l'onglet cliqué
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(`${tabId}-content`).classList.add('active');
+      });
+    });
+
+    // Marquer le jour actuel dans le calendrier
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cette fonction serait utilisée pour initialiser le calendrier avec la date actuelle
+      // Pour l'exemple, nous avons déjà marqué le "23" comme jour actuel avec la classe "today"
+    });
+  </script>
+</body>
+</html>
