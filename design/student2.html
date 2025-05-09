@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENT USTHB - Espace Etudiant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="student2.css">
+</head>
+<body>
+  <!-- Loader de chargement -->
+  <div class="loader-container" id="loader">
+    <span class="loader"></span>
+  </div>
+
+  <!-- Header avec navigation -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Logo USTHB" class="logo">
+      <span class="university-name">Espace Numérique de Travail – USTHB</span>
+    </div>
+    
+    <div class="header-controls">
+      <div class="notifications" id="notifToggle">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge">3</span>
+        <!-- Menu notifications -->
+        <div class="dropdown" id="notifDropdown">
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-bullhorn"></i>
+            <div>
+              <strong>Inscription TD/TP</strong>
+              <p>Les inscriptions sont ouvertes</p>
+            </div>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-calendar-alt"></i>
+            <div>
+              <strong>Emploi du temps</strong>
+              <p>Mise à jour disponible</p>
+            </div>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-book"></i>
+            <div>
+              <strong>Nouveaux cours</strong>
+              <p>Documents disponibles</p>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-eye"></i>
+            Voir toutes les notifications
+          </a>
+        </div>
+      </div>
+      
+      <button class="theme-toggle" id="toggleTheme" title="Changer le thème">
+        <i class="fas fa-moon"></i>
+      </button>
+      
+      <div class="user-profile" id="userToggle">
+        <div class="avatar">E</div>
+        <span>Étudiant</span>
+        <!-- Menu utilisateur -->
+        <div class="dropdown" id="userDropdown">
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user"></i>
+            Mon profil
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-cog"></i>
+            Paramètres
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-question-circle"></i>
+            Aide et support
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            Déconnexion
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation principale -->
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="#" class="nav-link active">
+          <i class="fas fa-home"></i>
+          <span>Accueil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Note des examens</span>
+        </a>
+      </li>
+    </a>
+</li>
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="fas fa-book"></i>
+    <span>document pedagogique</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="fas fa-clipboard-list"></i>
+    <span>Évaluations</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="fas fa-users"></i>
+    <span>Groupe et section</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="fas fa-landmark"></i>
+    <span>Services</span>
+  </a>
+</li>
+</ul>
+</nav>
+
+<!-- Contenu principal -->
+<main class="container">
+  <!-- Dashboard Grid -->
+<div class="sidebar">
+  <div class="sidebar-card">
+    <div class="section-title" onclick="toggleSection(this)">
+      <i class="fas fa-bell"></i> Nouveauté
+    </div>
+    <ul>
+      <li><i class="fas fa-star"></i>Cours à suivre</li>
+      <li><i class="fas fa-exclamation-circle"></i>Emploi du temps</li>
+      <li><i class="fas fa-graduation-cap"></i>Devoirs et projets</li>
+    </ul>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="section-title" onclick="toggleSection(this)">
+      <i class="fas fa-chalkboard-teacher"></i> Services
+    </div>
+    <ul>
+      <li><i class="fas fa-users"></i>Relevé de notes</li>
+      <li><i class="fas fa-clipboard-list"></i>Certificat de scolarité</li>
+      <li><i class="fas fa-tasks"></i>Certificat de scolarité</li>
+      <li><i class="fas fa-book-open"></i>Cours et supports</li>
+      <li><i class="fas fa-file-alt"></i>Plans de cours</li>
+      <li><i class="fas fa-award"></i>Restaurant U</li>
+    </ul>
+  </div>
+</div>
+<!-- Section bienvenue -->
+<section class="welcome-section">
+<div class="welcome-text">
+  <h1 class="welcome-title">Bienvenue dans votre espace étudiant</h1>
+  <p class="welcome-subtitle">Suivez votre cursus, consultez vos notes et gérez toutes vos démarches administratives depuis un seul endroit.</p>
+  
+</div>
+<img src="student-colored.png" alt="Illustration" class="illustration">
+<div class="bg-shape"></div>
+</section>
+
+
+
+
+
+
+
+<!-- FAQ -->
+<section class="faq-section">
+<div class="faq-header">
+  <h2 class="section-title">
+    <i class="fas fa-question-circle"></i>
+    Questions fréquentes
+  </h2>
+</div>
+
+<div class="faq-list">
+  <div class="faq-item">
+    <div class="faq-question">
+      Comment obtenir mon certificat de scolarité ?
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="faq-answer">
+      Vous pouvez télécharger votre certificat de scolarité directement depuis la section "Documents administratifs" de votre espace étudiant, ou vous rendre au service de scolarité avec votre carte d'étudiant.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      Comment contester une note d'examen ?
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="faq-answer">
+      Pour contester une note, vous devez remplir le formulaire de demande de vérification disponible sur votre ENT dans la section "Formulaires" et le soumettre au secrétariat de votre département dans un délai de 3 jours après la publication des notes.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      Comment accéder au WiFi du campus ?
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="faq-answer">
+      Pour vous connecter au réseau WiFi de l'université, utilisez votre identifiant et mot de passe ENT. Sélectionnez le réseau "USTHB-Student" et suivez les instructions de connexion. En cas de problème, contactez le service informatique.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Évaluation d'entrée -->
+<section class="entry-form">
+<h2 class="section-title">
+  <i class="fas fa-clipboard-check"></i>
+  Questionnaire d'accueil
+</h2>
+<p>Aidez-nous à améliorer votre expérience universitaire en répondant à ce court questionnaire.</p>
+<form action="#" method="post" class="mt-4">
+  <div class="form-group">
+    <label for="major">Votre filière</label>
+    <select class="form-control" id="major">
+      <option>Informatique</option>
+      <option>Mathématiques</option>
+      <option>Physique</option>
+      <option>Chimie</option>
+      <option>Biologie</option>
+      <option>Génie Civil</option>
+      <option>Électronique</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="interests">Centres d'intérêt académiques</label>
+    <textarea class="form-control" id="interests" rows="3" placeholder="Décrivez vos centres d'intérêt..."></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="expectations">Attentes pour cette année universitaire</label>
+    <textarea class="form-control" id="expectations" rows="3" placeholder="Partagez vos attentes..."></textarea>
+  </div>
+  
+  <button type="submit" class="btn-submit">Soumettre</button>
+</form>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+
+<div class="footer-links">
+<a href="#" class="footer-link">À propos</a>
+<a href="#" class="footer-link">Mentions légales</a>
+<a href="#" class="footer-link">Confidentialité</a>
+<a href="#" class="footer-link">Accessibilité</a>
+<a href="#" class="footer-link">Contact</a>
+</div>
+
+<p>&copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB. Tous droits réservés.</p>
+</footer>
+
+<script>
+// Cacher le loader après chargement de la page
+window.addEventListener('load', function() {
+setTimeout(function() {
+  document.getElementById('loader').classList.add('hidden');
+}, 500);
+});
+
+// Toggle thème clair/sombre
+document.getElementById('toggleTheme').addEventListener('click', function() {
+const html = document.documentElement;
+if (html.getAttribute('data-theme') === 'light') {
+  html.setAttribute('data-theme', 'dark');
+  this.innerHTML = '<i class="fas fa-sun"></i>';
+} else {
+  html.setAttribute('data-theme', 'light');
+  this.innerHTML = '<i class="fas fa-moon"></i>';
+}
+});
+// Fonction pour afficher/masquer les sections du menu
+    function toggleSection(element) {
+      const sectionList = element.nextElementSibling;
+      sectionList.classList.toggle('collapsed');
+    }
+
+// Toggle notifications dropdown
+document.getElementById('notifToggle').addEventListener('click', function(e) {
+e.stopPropagation();
+document.getElementById('notifDropdown').classList.toggle('active');
+document.getElementById('userDropdown').classList.remove('active');
+});
+
+// Toggle user dropdown
+document.getElementById('userToggle').addEventListener('click', function(e) {
+e.stopPropagation();
+document.getElementById('userDropdown').classList.toggle('active');
+document.getElementById('notifDropdown').classList.remove('active');
+});
+
+// Fermer les dropdowns en cliquant ailleurs
+document.addEventListener('click', function() {
+document.getElementById('notifDropdown').classList.remove('active');
+document.getElementById('userDropdown').classList.remove('active');
+});
+
+// Toggle FAQ
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(question => {
+question.addEventListener('click', () => {
+  const answer = question.nextElementSibling;
+  const isActive = answer.classList.contains('active');
+  
+  // Fermer tous les autres
+  document.querySelectorAll('.faq-answer').forEach(ans => {
+    ans.classList.remove('active');
+  });
+  
+  // Toggle current si ce n'était pas ouvert
+  if (!isActive) {
+    answer.classList.add('active');
+  }
+});
+});
+</script>
+</body>
+</html>
