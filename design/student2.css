@@ -39,7 +39,7 @@
       --text-secondary: #e2e8f0;
       --text-tertiary: #cbd5e1;
       --border: #334155;
-      --shadow: 0 10px 25px -5px rgba(0, 131, 143, 0.2), 0 8px 10px -6px rgba(0, 88, 143, 0.15);
+      --shadow: 0 10px 25px -5px rgba(0, 131, 143, 0.2), 0 8px 10px -6px rgba(0, 131, 143, 0.15);
       --shadow-sm: 0 4px 6px -1px rgba(0, 76, 143, 0.15), 0 2px 4px -1px rgba(0, 131, 143, 0.1);
       --header-bg: linear-gradient(135deg, #164063 0%, #082044 100%);
       --card-gradient: linear-gradient(135deg, var(--primary)0%,var(--secondary) 100%);
@@ -354,8 +354,7 @@
       padding: 2rem;
       box-shadow: var(--shadow);
       overflow: hidden;
-      position: relative;
-      width: 80%;         /* Réduit la largeur à 80% du conteneur parent */
+      position: relative;      /* Réduit la largeur à 80% du conteneur parent */
       max-width: 800px;   /* (Optionnel) Limite la largeur maximale */
       height: auto;  
     }
