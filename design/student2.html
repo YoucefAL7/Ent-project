@@ -24,7 +24,6 @@
     <div class="header-controls">
       <div class="notifications" id="notifToggle">
         <i class="fas fa-bell"></i>
-        <span class="notification-badge">3</span>
         <!-- Menu notifications -->
         <div class="dropdown" id="notifDropdown">
           <a href="#" class="dropdown-item">
@@ -171,12 +170,6 @@
 <div class="bg-shape"></div>
 </section>
 
-
-
-
-
-
-
 <!-- FAQ -->
 <section class="faq-section">
 <div class="faq-header">
@@ -223,9 +216,9 @@
 <section class="entry-form">
 <h2 class="section-title">
   <i class="fas fa-clipboard-check"></i>
-  Questionnaire d'accueil
+  Formulaire de plainte
 </h2>
-<p>Aidez-nous à améliorer votre expérience universitaire en répondant à ce court questionnaire.</p>
+<p>Un souci à signaler ? Remplis ce formulaire pour nous faire part de ta plainte ou d’un problème rencontré à l’université. On s’engage à te répondre rapidement et à trouver une solution..</p>
 <form action="#" method="post" class="mt-4">
   <div class="form-group">
     <label for="major">Votre filière</label>
@@ -241,13 +234,20 @@
   </div>
   
   <div class="form-group">
-    <label for="interests">Centres d'intérêt académiques</label>
-    <textarea class="form-control" id="interests" rows="3" placeholder="Décrivez vos centres d'intérêt..."></textarea>
+    <label for="major">Liste de plainte</label>
+    <select class="form-control" id="major">
+      <option>problème avec anseignant</option>
+      <option>problème de notes</option>
+      <option>conflit avec un autre Etudiant</option>
+      <option>problème administratif</option>
+      <option>problème lie a la securite</option>
+      <option>Autre(a preciser dans la description)</option>
+    </select>
   </div>
   
   <div class="form-group">
-    <label for="expectations">Attentes pour cette année universitaire</label>
-    <textarea class="form-control" id="expectations" rows="3" placeholder="Partagez vos attentes..."></textarea>
+    <label for="expectations">description</label>
+    <textarea class="form-control" id="expectations" rows="3" placeholder="decriver votre plainte..."></textarea>
   </div>
   
   <button type="submit" class="btn-submit">Soumettre</button>
