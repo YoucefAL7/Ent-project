@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espace Doctorant - USTHB</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f0f5fa; /* رمادي مزرق فاتح جدًا */
+      color: #002855;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #001f4d; /* أزرق داكن جدًا */
+      color: #fff;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.4rem;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 3rem;
+      flex-wrap: wrap;
+    }
+
+    .sidebar {
+      background-color: #eaf3fc; /* أزرق رمادي باهت */
+      border-radius: 16px;
+      padding: 2rem;
+      width: 260px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #003566;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 0;
+      color: #002855;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item i {
+      margin-right: 10px;
+      color: #0077b6; /* أزرق سماوي متوسط */
+    }
+
+    .menu-item:hover {
+      color: #0077b6;
+    }
+
+    .illustration {
+      max-width: 450px;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .sidebar {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      .illustration {
+        max-width: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>Espace Numérique de Travail – USTHB</div>
+    <div>Doctorant</div>
+  </header>
+
+  <main>
+    <div class="sidebar">
+      <div class="menu-title">Menu</div>
+      <a href="#" class="menu-item"><i class="fas fa-user"></i> Voir le profil</a>
+      <a href="#" class="menu-item"><i class="fas fa-wifi"></i> Compte Wifi</a>
+      <a href="#" class="menu-item"><i class="fas fa-folder-open"></i> Dossier csf</a>
+      <a href="#" class="menu-item"><i class="fas fa-database"></i> Accès Proquest</a>
+      <a href="#" class="menu-item"><i class="fas fa-cogs"></i> Techniques de l’ingénieur</a>
+      <a href="#" class="menu-item"><i class="fas fa-gavel"></i> Textes Règlementaires</a>
+      <a href="#" class="menu-item"><i class="fas fa-flask"></i> Stage scientifique</a>
+      <a href="#" class="menu-item"><i class="fas fa-briefcase"></i> Stage de perfectionnement</a>
+    </div>
+
+    <img src="student-doctorate.png" alt="Illustration doctorants" class="illustration" />
+  </main>
+
+</body>
+</html>
