@@ -12,7 +12,6 @@
     :root {
       --primary: #5e35b1;
       --primary-dark: #4527a0;
-      --primary-light: #9575cd;
       --secondary: #26a69a;
       --bg-light: #f8f9fa;
       --bg-dark: #121212;
@@ -20,10 +19,6 @@
       --text-dark: #e9ecef;
       --card-light: #ffffff;
       --card-dark: #1e1e1e;
-      --sidebar-light: #ffffff;
-      --sidebar-dark: #1a1a2e;
-      --sidebar-active-light: rgba(94, 53, 177, 0.1);
-      --sidebar-active-dark: rgba(156, 39, 176, 0.2);
       --shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       --shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       --accent: #9c27b0;
@@ -31,8 +26,6 @@
       --success: #4caf50;
       --warning: #ff9800;
       --info: #2196f3;
-      --sidebar-width: 280px;
-      --sidebar-collapsed-width: 80px;
     }
 
     * {
@@ -66,9 +59,6 @@
       padding: 1rem 2rem;
       box-shadow: var(--shadow-light);
       transition: all 0.3s ease;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     body.dark header {
@@ -146,70 +136,42 @@
       transition: all 0.3s ease;
     }
 
-    /* Sidebar Styles - Redesign */
+    /* Sidebar Styles */
     .sidebar {
-      width: var(--sidebar-width);
-      background-color: var(--sidebar-light);
-      padding: 1.5rem 0;
+      width: 280px;
+      background-color: var(--card-light);
+      padding: 2rem 1rem;
       box-shadow: var(--shadow-light);
       transition: all 0.3s ease;
-      z-index: 90;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
+      z-index: 10;
     }
 
     body.dark .sidebar {
-      background-color: var(--sidebar-dark);
+      background-color: var(--card-dark);
       box-shadow: var(--shadow-dark);
-    }
-
-    .sidebar-header {
-      padding: 0 1.5rem 1.5rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      margin-bottom: 1rem;
-    }
-
-    body.dark .sidebar-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .menu-title {
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
       color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      text-align: center;
     }
 
     body.dark .menu-title {
       color: var(--accent-light);
     }
 
-    .menu-title i {
-      font-size: 1rem;
-    }
-
-    .menu-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0 0.75rem;
-    }
-
     .menu-item {
       display: flex;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.8rem 1rem;
       color: var(--text-light);
       text-decoration: none;
       border-radius: 8px;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
       transition: all 0.3s ease;
-      position: relative;
     }
 
     body.dark .menu-item {
@@ -217,9 +179,8 @@
     }
 
     .menu-item i {
-      width: 24px;
-      text-align: center;
-      font-size: 1rem;
+      margin-right: 12px;
+      font-size: 1.1rem;
       color: var(--primary);
       transition: all 0.3s ease;
     }
@@ -230,125 +191,30 @@
 
     .menu-item span {
       flex: 1;
-      font-size: 0.9rem;
-      margin-left: 12px;
-      transition: opacity 0.3s ease;
+      font-size: 0.95rem;
     }
 
     .menu-item:hover {
-      background-color: var(--sidebar-active-light);
+      background-color: rgba(94, 53, 177, 0.1);
       color: var(--primary);
-      transform: translateX(5px);
     }
 
     body.dark .menu-item:hover {
-      background-color: var(--sidebar-active-dark);
+      background-color: rgba(186, 104, 200, 0.1);
       color: var(--accent-light);
     }
 
     .menu-item.active {
-      background-color: var(--sidebar-active-light);
-      color: var(--primary);
-      font-weight: 500;
+      background-color: var(--primary);
+      color: white;
     }
 
     .menu-item.active i {
-      color: var(--primary);
-    }
-
-    .menu-item.active::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, var(--primary), var(--accent));
-      border-radius: 0 4px 4px 0;
+      color: white;
     }
 
     body.dark .menu-item.active {
-      background-color: var(--sidebar-active-dark);
-      color: var(--accent-light);
-    }
-
-    body.dark .menu-item.active i {
-      color: var(--accent-light);
-    }
-
-    .sidebar-footer {
-      padding: 1.5rem 1rem 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-      margin-top: auto;
-    }
-
-    body.dark .sidebar-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .sidebar-collapse-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0.75rem;
-      background-color: rgba(0, 0, 0, 0.05);
-      border: none;
-      border-radius: 8px;
-      color: var(--primary);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    body.dark .sidebar-collapse-btn {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--accent-light);
-    }
-
-    .sidebar-collapse-btn:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    body.dark .sidebar-collapse-btn:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Collapsed Sidebar State */
-    .sidebar.collapsed {
-      width: var(--sidebar-collapsed-width);
-    }
-
-    .sidebar.collapsed .menu-title span,
-    .sidebar.collapsed .menu-item span {
-      opacity: 0;
-      width: 0;
-      margin-left: 0;
-      position: absolute;
-    }
-
-    .sidebar.collapsed .menu-title {
-      justify-content: center;
-    }
-
-    .sidebar.collapsed .menu-item {
-      justify-content: center;
-      padding: 0.75rem 0;
-    }
-
-    .sidebar.collapsed .menu-item:hover {
-      transform: scale(1.1);
-    }
-
-    .sidebar.collapsed .menu-item.active::before {
-      width: 3px;
-      height: 60%;
-      top: 20%;
-    }
-
-    .sidebar.collapsed .sidebar-header,
-    .sidebar.collapsed .sidebar-footer {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+      background-color: var(--accent);
     }
 
     /* Content Area */
@@ -357,11 +223,6 @@
       padding: 2rem;
       display: flex;
       flex-direction: column;
-      transition: margin-left 0.3s ease;
-    }
-
-    .sidebar.collapsed ~ .content-area {
-      margin-left: calc(var(--sidebar-collapsed-width) - var(--sidebar-width));
     }
 
     .welcome-section {
@@ -402,7 +263,6 @@
       font-size: 1rem;
       color: var(--text-light);
       margin-bottom: 1.5rem;
-      line-height: 1.6;
     }
 
     body.dark .welcome-subtitle {
@@ -827,23 +687,6 @@
       cursor: pointer;
     }
 
-    /* Overlay for mobile menu */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 80;
-      backdrop-filter: blur(3px);
-    }
-
-    .sidebar-overlay.active {
-      display: block;
-    }
-
     /* Media Queries */
     @media (max-width: 1024px) {
       .welcome-content {
@@ -945,6 +788,22 @@
         font-size: 0.8rem;
       }
     }
+
+    /* Overlay for mobile menu */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 5;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -972,7 +831,7 @@
   
   <div class="main-container">
     <div class="sidebar" id="sidebar">
-      <div class="menu-title">Menu </div>
+      <div class="menu-title">Menu Administratif</div>
       <a href="#" class="menu-item"><i class="fas fa-user"></i><span>Votre Profil</span></a>
       <a href="#" class="menu-item"><i class="fas fa-wifi"></i><span>Compte Wifi</span></a>
       <a href="#" class="menu-item active"><i class="fas fa-folder-open"></i><span>Dossier CSF</span></a>
@@ -981,7 +840,7 @@
       <a href="#" class="menu-item"><i class="fas fa-gavel"></i><span>Textes Règlementaires</span></a>
       <a href="#" class="menu-item"><i class="fas fa-flask"></i><span>Stage scientifique</span></a>
       <a href="#" class="menu-item"><i class="fas fa-briefcase"></i><span>Stage de perfectionnement</span></a>
-     
+      
     </div>
 
     <div class="content-area">
@@ -996,16 +855,16 @@
         </div>
       </section>
 
-      <!-- News Ticker -->
+    <!-- Quick Actions -->
       <div class="news-ticker">
        
           <div class="ticker-label">
-            <i  class="fas fa-rocket"> Quick Actions :</i> 
-         
-        </div>
+            <i class="fas fa-rocket"></i> Quick Actions:
+          </div>
+          
       </div>
 
-      <!-- Quick Actions -->
+      
       <div class="quick-actions">
         <div class="action-card">
           <div class="action-icon primary">
