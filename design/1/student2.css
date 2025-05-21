@@ -355,7 +355,7 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       position: relative;      /* Réduit la largeur à 80% du conteneur parent */
-      max-width: 800px;   /* (Optionnel) Limite la largeur maximale */
+      max-width: 1000px;   /* (Optionnel) Limite la largeur maximale */
       height: auto;  
     }
 
