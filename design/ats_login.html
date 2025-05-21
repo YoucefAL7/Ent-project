@@ -1,192 +1,465 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>
             Environement Numerique de Travail
         </title>
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             .image-side {
                 box-shadow: 0 0 0 transparent;
                 background: none;
+                width: 35%;
+                display: flex;
+                justify-content: center;
             }
             
             .image-side img {
                 width: 100%;
+                max-width: 550px;
                 height: auto;
                 object-fit: cover;
                 border-radius: 10px;
-                box-shadow: 5px 20px 50px transparent ;
+                box-shadow: 5px 20px 50px rgba(0,0,0,0.2);
                 background: transparent;
+                margin-bottom: 30px;
             }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 150px;
-            width: 90%;
-            max-width: 1200px;
-            padding: 0 40px;
-        }
-        
-        body {
-            margin: 0;
-            padding: 40px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: 'Jost', sans-serif;
-            background: linear-gradient(to bottom, #56b6f7, #b4e0f3);
-        }
-        .main{
-            align-self: flex-start;
-            width: 350px;
-            height: 500px;
-            background: red;
-            overflow: hidden;
-            background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
-            border-radius: 10px;
-            box-shadow: 5px 20px 50px #232323;
-            margin-left: 80px;
-        }
-        #chk{
-            display: none;
-        }
-        .signup{
-            position: relative;
-            width:100%;
-            height: 100%;
-        }
-        label{
-            color: #fff;
-            font-size: 2.3em;
-            justify-content: center;
-            display: flex;
-            margin: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: .5s ease-in-out;
-        }
-        input{
-            width: 60%;
-            height: 10px;
-            background: #e0dede;
-            justify-content: center;
-            display: flex;
-            margin: 20px auto;
-            padding: 12px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-        }
-        button{
-            width: 60%;
-            height: 40px;
-            margin: 10px auto;
-            justify-content: center;
-            display: block;
-            color: #fff;
-            background: rgb(143, 233, 243);
-            font-size: 1em;
-            font-weight: bold;
-            margin-top: 30px;
-            outline: none;
-            border: none;
-            border-radius: 5px;
-            transition: .2s ease-in;
-            cursor: pointer;
-        }
-        button:hover{
-            background: rgb(143, 233, 243);
-        }
-        .login{
-            height: 460px;
-            background: #eee;
-            border-radius: 60% / 10%;
-            transform: translateY(-180px);
-            transition: .8s ease-in-out;
-        }
-        .login label{
-            color: rgb(143, 233, 243);
-            transform: scale(.6);
-        }
-        
-        #chk:checked ~ .login{
-            transform: translateY(-500px);
-        }
-        #chk:checked ~ .login label{
-            transform: scale(1);	
-        }
-        #chk:checked ~ .signup label{
-            transform: scale(.6);
-        }
-        button {
-            position: relative;
-            width: 60%;
-            height: 40px;
-            margin: 10px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #56b6f7;
-            background: rgb(143, 233, 243);
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: .2s ease-in;
-            border: none;
-            overflow: hidden;
-        }
-        
-        button:hover {
-            background: rgb(143, 233, 243);
-        }
-        
-        button input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0; /* Rendre l'input invisible */
-            cursor: pointer;
-        }
-        h1{
-            color: #ecf4f7;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+            
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 15px 5%;
+                margin-bottom: 10px;
+                background-color: transparent;
+            }
+            
+            .logo-title {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .logo {
+                width: 70px;
+                height: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .title {
+                font-size: 30px;
+                font-weight: bold;
+                color: #333;
+            }
+            
+            .back-button, .dark-mode-button {
+                background: none;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+                color: #333;
+                transition: color 0.3s;
+                padding: 8px;
+                border-radius: 50%;
+                width: 42px;
+                height: 42px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .back-button:hover, .dark-mode-button:hover {
+                color: #56b6f7;
+            }
+            
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 150px;
+                width: 90%;
+                max-width: 1200px;
+                padding: 0 20px;
+                margin-bottom: 60px; /* Espace pour le footer */
+            }
+            
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: 'Jost', sans-serif;
+                background: linear-gradient(to bottom, #56b6f7, #9370DB);
+                min-height: 100vh;
+                transition: background 0.3s;
+                padding-bottom: 80px; /* Espace pour le footer */
+            }
+            
+            body.dark-mode {
+                background: linear-gradient(to bottom, #190c60, #32047b);
+                color: #fff;
+            }
+            
+            body.dark-mode .title {
+                color: #fff;
+            }
+            
+            body.dark-mode .back-button, 
+            body.dark-mode .dark-mode-button {
+                color: #fff;
+            }
+            
+            body.dark-mode .footer {
+                color: #ddd;
+            }
+            
+            .main {
+                align-self: flex-start;
+                width: 350px;
+                height: 500px;
+                background: red;
+                overflow: hidden;
+                background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
+                border-radius: 10px;
+                box-shadow: 5px 20px 50px #232323;
+                margin-left: 80px;
+            }
+            #chk {
+                display: none;
+            }
+            .signup {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+            label {
+                color: #fff;
+                font-size: 2.3em;
+                justify-content: center;
+                display: flex;
+                margin: 50px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: .5s ease-in-out;
+            }
+            input {
+                width: 60%;
+                height: 10px;
+                background: #e0dede;
+                justify-content: center;
+                display: flex;
+                margin: 20px auto;
+                padding: 12px;
+                border: none;
+                outline: none;
+                border-radius: 5px;
+            }
+            button {
+                width: 60%;
+                height: 40px;
+                margin: 10px auto;
+                justify-content: center;
+                display: block;
+                color: #fff;
+                background: rgb(143, 233, 243);
+                font-size: 1em;
+                font-weight: bold;
+                margin-top: 30px;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                transition: .2s ease-in;
+                cursor: pointer;
+            }
+            button:hover {
+                background: rgb(143, 233, 243);
+            }
+            .login {
+                height: 460px;
+                background: #eee;
+                border-radius: 60% / 10%;
+                transform: translateY(-180px);
+                transition: .8s ease-in-out;
+            }
+            .login label {
+                color: rgb(143, 233, 243);
+                transform: scale(.6);
+            }
+            #chk:checked ~ .login {
+                transform: translateY(-500px);
+            }
+            #chk:checked ~ .login label {
+                transform: scale(1);
+            }
+            #chk:checked ~ .signup label {
+                transform: scale(.6);
+            }
+            button {
+                position: relative;
+                width: 60%;
+                height: 40px;
+                margin: 10px auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #56b6f7;
+                background: rgb(143, 233, 243);
+                font-size: 1em;
+                font-weight: bold;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: .2s ease-in;
+                border: none;
+                overflow: hidden;
+            }
+            button:hover {
+                background: rgb(143, 233, 243);
+            }
+            button input[type="file"] {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0; /* Rendre l'input invisible */
+                cursor: pointer;
+            }
+            h1 {
+                color: #ecf4f7;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            /* Media queries pour l'adaptation à différents appareils */
+            @media (max-width: 768px) {
+                .header {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 15px;
+                    margin-bottom: 15px;
+                }
+                
+                .logo-title {
+                    margin: 0 auto;
+                    margin-bottom: 10px;
+                }
+                
+                .back-button, .dark-mode-button {
+                    margin: 10px;
+                }
+                
+                .container {
+                    flex-direction: column;
+                    gap: 30px;
+                    align-items: center;
+                    padding: 0 20px;
+                    margin-bottom: 80px;
+                }
+                
+                .main {
+                    width: 90%;
+                    margin-left: 0;
+                    margin-bottom: 20px;
+                    height: 500px;
+                }
+                
+                .image-side {
+                    width: 90%;
+                }
+                
+                .image-side img {
+                    width: 100%;
+                    max-height: 350px;
+                }
+                
+                h1 {
+                    font-size: 24px;
+                }
+                
+                .logo {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .header {
+                    padding: 10px;
+                }
+                
+                .logo {
+                    width: 35px;
+                    height: 35px;
+                }
+                
+                .title {
+                    font-size: 20px;
+                }
+                
+                .back-button, .dark-mode-button {
+                    width: 36px;
+                    height: 36px;
+                    font-size: 16px;
+                }
+                
+                .main {
+                    width: 95%;
+                    height: 450px;
+                }
+                
+                .image-side img {
+                    max-height: 300px;
+                }
+                
+                h1 {
+                    font-size: 20px;
+                }
+            }
+            
+            .footer {
+                width: 90%;
+                max-width: 1200px;
+                margin-top: 20px;
+                padding: 15px 20px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                text-align: center;
+                color: #333;
+                font-size: 14px;
+            }
+            
+            .footer p {
+                margin: 8px 0;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .footer-link {
+                color: #56b6f7;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+            
+            .footer-link:hover {
+                color: #9370DB;
+            }
+            
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.2);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #56b6f7;
+                transition: all 0.3s;
+            }
+            
+            .social-icon:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(3px);
+            }
         </style>
     </head>
     <body>
-            <h1>Bienvenue dans l'Environement Numerique de Travail pour Administration</h1>
-            <br>
-            <div class="container">
+        <div class="header">
+            <button class="back-button" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-title">
+                <div class="logo">
+                    <img src="logo.png" alt="Logo ENT" />
+                </div>
+                <div class="title">
+                    Environement Numerique de Travail
+                </div>
+            </div>
+            <button class="dark-mode-button" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        
+        <div class="container">
             <div class="main">  	
                 <input type="checkbox" id="chk" aria-hidden="true">
         
                     <div class="signup">
                         <form>
-                            <label for="chk" aria-hidden="true">Inscrire</label>
-                            <input type="text" name="text" placeholder="Nom Complet" required="">
+                            <label for="chk" aria-hidden="true">Connecter</label>
                             <input type="number" name="number" placeholder="Matricule" min="12" max="12">
                             <input type="password" name="password" placeholder="Mot de Passe" required="">
-                            <button><a href="ATS.html" ></a>Inscrire</button>
+                            <button><a href="ATS.html" ></a>Connecter</button>
                         </form>
                     </div>
         
                     <div class="login">
                         <form>
-                            <label for="chk" aria-hidden="true">Connecter</label>
+                            <label for="chk" aria-hidden="true">Inscrire</label>
                             <input type="number" name="number" placeholder="Matricule" min="12" max="12">
                             <input type="password" name="pswd" placeholder="Mot de Passe" required="">
-                            <button><a href="ATS.html" ></a>Connecter</button>
+                            <input type="text" name="text" placeholder="Nom Complet" required="">
+                            <button><a href="ATS.html" ></a>Inscrire</button>
                         </form>
                     </div>
             </div>
             <div class="image-side">
-                <img src="admin-illustration.png"/>
+                <img src="admin-illustration.png" alt="Illustration d'environnement numérique"/>
             </div>
         </div>
-
+        
+        <div class="footer">
+            <p>&copy; 2023 Environement Numerique de Travail. Tous droits réservés.</p>
+            <p>Conception et développement par l'équipe technique.</p>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link">Mentions légales</a>
+                <a href="#" class="footer-link">Politique de confidentialité</a>
+                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Aide</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        
+        <script>
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const darkModeButton = document.querySelector('.dark-mode-button i');
+                if (document.body.classList.contains('dark-mode')) {
+                    darkModeButton.classList.remove('fa-moon');
+                    darkModeButton.classList.add('fa-sun');
+                } else {
+                    darkModeButton.classList.remove('fa-sun');
+                    darkModeButton.classList.add('fa-moon');
+                }
+            }
+        </script>
     </body>
 </html>
