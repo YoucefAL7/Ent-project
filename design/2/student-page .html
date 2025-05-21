@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENT USTHB - Espace Étudiant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a0ca3;
+      --primary-light: #4895ef;
+      --secondary: #4cc9f0;
+      --accent: #f72585;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --danger: #e74c3c;
+      --bg-light: #f8f9fa;
+      --bg-dark: #121212;
+      --text-light: #2d3436;
+      --text-dark: #f5f6fa;
+      --card-light: #ffffff;
+      --card-dark: #1e1e1e;
+      --border-light: #e0e0e0;
+      --border-dark: #333333;
+      --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      line-height: 1.6;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      background-color: var(--card-light);
+      box-shadow: var(--shadow-light);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    body.dark header {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .university-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
+    }
+
+    body.dark .nav-link {
+      color: var(--text-dark);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    body.dark .nav-link:hover {
+      background-color: rgba(67, 97, 238, 0.2);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown:hover .nav-link {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    body.dark .dropdown:hover .nav-link {
+      background-color: rgba(67, 97, 238, 0.2);
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--card-light);
+      box-shadow: var(--shadow-light);
+      border-radius: 16px;
+      padding: 1rem 0;
+      min-width: 240px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    body.dark .dropdown-content {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      padding: 1rem 1.75rem;
+      color: var(--text-light);
+      text-decoration: none;
+      display: block;
+      transition: var(--transition);
+      margin: 0.25rem 0.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    body.dark .dropdown-item {
+      color: var(--text-dark);
+    }
+
+    .dropdown-item:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--primary);
+    }
+
+    body.dark .dropdown-item:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .theme-toggle {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05) rotate(15deg);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .user-profile:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark .user-profile:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    body.dark .menu-toggle {
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .welcome-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      gap: 2rem;
+    }
+
+    .welcome-text {
+      max-width: 750px;
+    }
+
+    .welcome-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    body.dark .welcome-subtitle {
+      color: var(--text-dark);
+    }
+
+    .welcome-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: 0 8px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background-color: transparent;
+    }
+
+    body.dark .btn-outline {
+      color: var(--text-dark);
+      border-color: var(--primary-light);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    .illustration-container {
+      position: relative;
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .illustration {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+      animation: float 6s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    .circle-animation {
+      position: absolute;
+      width: 85%;
+      height: 85%;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      opacity: 0.1;
+      z-index: 2;
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.1; }
+      50% { transform: scale(1.05); opacity: 0.15; }
+      100% { transform: scale(0.95); opacity: 0.1; }
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title::before {
+      content: "";
+      display: block;
+      width: 8px;
+      height: 24px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 4px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background-color: var(--card-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    body.dark .card {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    body.dark .card:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-accent {
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .card-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      background-color: rgba(67, 97, 238, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-size: 2rem;
+      transition: var(--transition);
+    }
+
+    body.dark .card-icon {
+      background-color: rgba(67, 97, 238, 0.2);
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1);
+    }
+
+    .card:nth-child(2n) .card-icon {
+      background-color: rgba(247, 37, 133, 0.1);
+      color: var(--accent);
+    }
+
+    body.dark .card:nth-child(2n) .card-icon {
+      background-color: rgba(247, 37, 133, 0.2);
+    }
+
+    .card:nth-child(3n) .card-icon {
+      background-color: rgba(76, 201, 240, 0.1);
+      color: var(--secondary);
+    }
+
+    body.dark .card:nth-child(3n) .card-icon {
+      background-color: rgba(76, 201, 240, 0.2);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 0;
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+
+    body.dark .card-text {
+      color: #94a3b8;
+    }
+
+    .news-section {
+      margin-bottom: 3rem;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .news-card {
+      background-color: var(--card-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    body.dark .news-card {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark .news-card:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .news-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .news-card:hover .news-image {
+      transform: scale(1.02);
+    }
+
+    .news-content {
+      padding: 1.5rem;
+    }
+
+    .news-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .news-card:hover .news-title {
+      color: var(--accent);
+    }
+
+    .news-excerpt {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    body.dark .news-excerpt {
+      color: #94a3b8;
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    body.dark .news-meta {
+      color: #94a3b8;
+    }
+
+    .read-more {
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+    }
+
+    .read-more:hover {
+      color: var(--accent);
+      gap: 0.5rem;
+    }
+
+    .announcements {
+      background-color: var(--card-light);
+      border-radius: 16px;
+      box-shadow: var(--shadow-light);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    body.dark .announcements {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .announcements-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    body.dark .announcements-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .announcements-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .view-all {
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition);
+    }
+
+    .view-all:hover {
+      color: var(--accent);
+      gap: 0.5rem;
+    }
+
+    .announcement-list {
+      padding: 1rem 0;
+    }
+
+    .announcement-item {
+      padding: 1rem 1.5rem;
+      border-left: 4px solid transparent;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .announcement-item:hover {
+      border-left-color: var(--primary);
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    body.dark .announcement-item:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .announcement-title {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .announcement-title::before {
+      content: "•";
+      color: var(--primary);
+    }
+
+    .announcement-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    body.dark .announcement-meta {
+      color: #94a3b8;
+    }
+
+    footer {
+      background-color: var(--card-light);
+      margin-top: auto;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    body.dark footer {
+      background-color: var(--card-dark);
+      color: #94a3b8;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-link {
+      color: #64748b;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    body.dark .footer-link {
+      color: #94a3b8;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--card-light);
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: var(--transition);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    body.dark .mobile-nav {
+      background-color: var(--card-dark);
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark .mobile-nav-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mobile-nav-link {
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+
+    body.dark .mobile-nav-link {
+      color: var(--text-dark);
+    }
+
+    .mobile-nav-link:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--primary);
+    }
+
+    body.dark .mobile-nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-nav-footer {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark .mobile-nav-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+      .welcome-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .welcome-text {
+        max-width: 150%;
+      }
+
+      .welcome-actions {
+        justify-content: center;
+      }
+
+      .illustration-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      .header-container {
+        padding: 0.75rem 1.5rem;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .university-name {
+        display: none;
+      }
+
+      .user-profile span {
+        display: none;
+      }
+
+      .header-controls {
+        gap: 1rem;
+      }
+
+      .welcome-title {
+        font-size: 1.75rem;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo USTHB" class="logo">
+        <span class="university-name">ENT USTHB</span>
+      </div>
+      
+      <nav class="nav-container">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link">
+              <i class="fas fa-home"></i>
+              Tableau de bord
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#services" class="nav-link">
+              <i class="fas fa-th-large"></i>
+              Services
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-content">
+              <a href="#mon-cursus" class="dropdown-item">Mon Cursus</a>
+              <a href="#emploi-du-temps" class="dropdown-item">Emploi du Temps</a>
+              <a href="#documents" class="dropdown-item">Documents Pédagogiques</a>
+              <a href="#bibliotheque" class="dropdown-item">Bibliothèque</a>
+              <a href="#messagerie" class="dropdown-item">Messagerie</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#actualites" class="nav-link">
+              <i class="fas fa-newspaper"></i>
+              Actualités
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#annonces" class="nav-link">
+              <i class="fas fa-bullhorn"></i>
+              Annonces
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#help" class="nav-link">
+              <i class="fas fa-question-circle"></i>
+              Aide
+            </a>
+          </li>
+        </ul>
+        
+        <div class="header-controls">
+          <button class="theme-toggle" id="toggleTheme" title="Changer le thème">
+            <i class="fas fa-moon"></i>
+          </button>
+          
+          <div class="user-profile">
+            <div class="avatar">E</div>
+            <span>Étudiant</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo USTHB" class="logo">
+        <span class="university-name">ENT USTHB</span>
+      </div>
+      <button class="menu-toggle" id="closeMobileNav">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-nav-links">
+      <a href="#dashboard" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Tableau de bord
+      </a>
+      
+      <a href="#mon-cursus" class="mobile-nav-link">
+        <i class="fas fa-user-graduate"></i>
+        Mon Cursus
+      </a>
+      
+      <a href="#emploi-du-temps" class="mobile-nav-link">
+        <i class="fas fa-calendar-alt"></i>
+        Emploi du Temps
+      </a>
+      
+      <a href="#documents" class="mobile-nav-link">
+        <i class="fas fa-book-open"></i>
+        Documents Pédagogiques
+      </a>
+      
+      <a href="#bibliotheque" class="mobile-nav-link">
+        <i class="fas fa-university"></i>
+        Bibliothèque
+      </a>
+      
+      <a href="#messagerie" class="mobile-nav-link">
+        <i class="fas fa-envelope"></i>
+        Messagerie
+      </a>
+      
+      <a href="#actualites" class="mobile-nav-link">
+        <i class="fas fa-newspaper"></i>
+        Actualités
+      </a>
+      
+      <a href="#annonces" class="mobile-nav-link">
+        <i class="fas fa-bullhorn"></i>
+        Annonces
+      </a>
+      
+      <a href="#help" class="mobile-nav-link">
+        <i class="fas fa-question-circle"></i>
+        Aide
+      </a>
+    </div>
+    
+    <div class="mobile-nav-footer">
+      <div class="user-profile">
+        <div class="avatar">E</div>
+        <span>Étudiant</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="welcome-section">
+      <div class="welcome-text">
+        <h1 class="welcome-title">Bienvenue sur votre Espace Numérique de Travail</h1>
+        <p class="welcome-subtitle">Accédez à toutes les ressources numériques et suivez vos études à l'USTHB facilement. Consultez vos cours, documents pédagogiques et restez informé des actualités de l'université.</p>
+        <div class="welcome-actions">
+          <a href="#services" class="btn btn-primary">
+            <i class="fas fa-rocket"></i>
+            Commencer
+          </a>
+          <a href="#help" class="btn btn-outline">
+            <i class="fas fa-question-circle"></i>
+            Guide d'utilisation
+          </a>
+        </div>
+      </div>
+      
+      <div class="illustration-container">
+        <div class="circle-animation"></div>
+        <img src="student-colored.png" alt="Illustration étudiant" class="illustration" />
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    
+
+    <!-- Services Section -->
+    <section id="services">
+      <h2 class="section-title">Mes Services</h2>
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3 class="card-title">Mon Cursus</h3>
+            <p class="card-text">Consultez votre parcours académique, votre emploi du temps et vos résultats.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3 class="card-title">Annonces</h3>
+            <p class="card-text">Restez informé des dernières actualités et communications officielles.</p>
+            
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="card-title">Emplois du Temps</h3>
+            <p class="card-text">Consultez votre planning des cours et des séances de travaux pratiques.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3 class="card-title">Documents Pédagogiques</h3>
+            <p class="card-text">Accédez à vos supports de cours, TD et TP pour chaque matière.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h3 class="card-title">Bibliothèque EBSCO</h3>
+            <p class="card-text">Accédez à des milliers de ressources et publications scientifiques.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="card-title">Résultat Orientation</h3>
+            <p class="card-text">Consultez les résultats d'orientation et d'affectation par filière.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3 class="card-title">Messagerie</h3>
+            <p class="card-text">Communiquez avec vos enseignants et collègues via la messagerie interne.</p>
+            
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3 class="card-title">Fichiers Cloud</h3>
+            <p class="card-text">Stockez et partagez vos fichiers personnels dans votre espace de stockage.</p>
+           
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="actualites">
+      <h2 class="section-title">Actualités de l'Université</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="usthb.jfif" alt="Actualité 1" class="news-image">
+          <div class="news-content">
+            <h3 class="news-title">Journée Portes Ouvertes 2025</h3>
+            <p class="news-excerpt">L'USTHB organise sa journée portes ouvertes annuelle le 15 juin 2025. Venez découvrir nos formations et rencontrer nos enseignants.</p>
+            <div class="news-meta">
+              <span>Il y a 2 jours</span>
+              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="news-card">
+          <img src="robot.jfif" alt="Actualité 2" class="news-image">
+          <div class="news-content">
+            <h3 class="news-title">Nouveaux Abonnements EBSCO</h3>
+            <p class="news-excerpt">La bibliothèque universitaire a renouvelé ses abonnements avec plus de 10,000 nouvelles ressources disponibles pour les étudiants.</p>
+            <div class="news-meta">
+              <span>Il y a 5 jours</span>
+              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="news-card">
+          <img src="images.jfif" alt="Actualité 3" class="news-image">
+          <div class="news-content">
+            <h3 class="news-title">Remise des Diplômes 2024</h3>
+            <p class="news-excerpt">La cérémonie de remise des diplômes pour la promotion 2024 aura lieu le 30 juillet dans l'amphithéâtre principal.</p>
+            <div class="news-meta">
+              <span>Il y a 1 semaine</span>
+              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section id="announcements">
+      <div class="announcements">
+        <div class="announcements-header">
+          <h2 class="announcements-title">Dernières annonces</h2>
+          <a href="#" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="announcement-list">
+          <div class="announcement-item">
+            <h3 class="announcement-title">Emploi du temps semestre 2 disponible</h3>
+            <div class="announcement-meta">
+              <span>Scolarité</span>
+              <span>Il y a 2 jours</span>
+            </div>
+          </div>
+          
+          <div class="announcement-item">
+            <h3 class="announcement-title">Reports des TPs d'algorithmique</h3>
+            <div class="announcement-meta">
+              <span>Département Informatique</span>
+              <span>Il y a 3 jours</span>
+            </div>
+          </div>
+          
+          <div class="announcement-item">
+            <h3 class="announcement-title">Examens de rattrapage - Dates et modalités</h3>
+            <div class="announcement-meta">
+              <span>Vice Rectorat</span>
+              <span>Il y a 1 semaine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Mentions légales</a>
+      <a href="#" class="footer-link">Contact</a>
+      <a href="#" class="footer-link">FAQ</a>
+      <a href="#" class="footer-link">Plan du site</a>
+    </div>
+    <p>&copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    function setTheme(theme) {
+      if (theme === "dark") {
+        body.classList.add("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        toggleBtn.setAttribute("title", "Passer en mode clair");
+      } else {
+        body.classList.remove("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        toggleBtn.setAttribute("title", "Passer en mode sombre");
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      setTheme(isDark ? "dark" : "light");
+    });
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+
+    // Mobile Navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const closeMobileNav = document.getElementById("closeMobileNav");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+
+    closeMobileNav.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+
+    // Close mobile nav when clicking on a link
+    document.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+
+    // Card click functionality
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", function() {
+        // You can add specific functionality here based on the card
+        // For now, we'll just log which card was clicked
+        const cardTitle = this.querySelector(".card-title").textContent;
+        console.log(`Card clicked: ${cardTitle}`);
+        
+        // In a real implementation, you would navigate to the corresponding page
+        // window.location.href = `#${getCardLink(cardTitle)}`;
+      });
+    });
+
+    // Notification bell animation
+    const notificationBell = document.querySelector(".notifications i");
+    notificationBell.addEventListener("click", function() {
+      this.classList.add("shake");
+      setTimeout(() => {
+        this.classList.remove("shake");
+      }, 500);
+    });
+
+    // Add shake animation to CSS
+    const style = document.createElement("style");
+    style.textContent = `
+      .shake {
+        animation: shake 0.5s;
+      }
+      
+      @keyframes shake {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(10deg); }
+        50% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Close dropdown when clicking on dropdown item
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const dropdownContent = item.closest('.dropdown-content');
+        if (dropdownContent && window.innerWidth < 992) {
+          dropdownContent.style.display = 'none';
+        }
+      });
+    });
+
+    fetch('/api/services/snippet')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('services-dynamic').innerHTML = html;
+    });
+
+  </script>
+</body>
+</html>
