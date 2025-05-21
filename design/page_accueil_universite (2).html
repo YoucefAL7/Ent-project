@@ -16,7 +16,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         body {
-            background-image: url('usthbbg.jpg'); 
+            background-image: url('background-image.jpg'); /* À remplacer par votre image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -42,11 +42,13 @@
             background: rgba(25, 33, 94, 0.8);
             backdrop-filter: blur(10px);
             color: white;
-            text-align: center;
-            padding: 2rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            padding: 1rem 2rem; /* Réduit de 2rem à 1rem pour la hauteur */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+            display: flex; /* Ajout pour le positionnement flexible */
+            align-items: center; /* Centrage vertical */
+            justify-content: center; /* Le contenu sera centré horizontalement */
         }
 
         header::before {
@@ -61,22 +63,24 @@
         }
 
         .logo-container {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 1.5rem;
+            position: absolute;
+            left: 2rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            height: 100%;
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
-            background: transparent; /* Changé de gradient à transparent */
-            border-radius: 20px;
-            margin: 0 auto;
+            width: 70px; /* Réduit de 100px à 70px */
+            height: 70px; /* Réduit de 100px à 70px */
+            background: transparent;
+            border-radius: 10px; /* Réduit de 20px à 10px */
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+            border: 2px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -94,8 +98,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            z-index: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: 1; /* Modifié pour être au-dessus de l'image mais sous d'autres éléments */
+            pointer-events: none; /* Pour que cela n'interfère pas avec les clics */
         }
 
         .logo span {
@@ -103,18 +108,26 @@
             z-index: 1;
         }
 
+        .header-text-container {
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            padding-left: 50px; /* Pour compenser l'espace pris par le logo */
+        }
+
         h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem; /* Réduit de 3rem à 2.5rem */
             font-weight: 700;
             letter-spacing: 1px;
+            margin-bottom: 0.2rem; /* Réduit de 0.5rem à 0.2rem */
             position: relative;
             z-index: 1;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* Réduit de 1.3rem à 1.1rem */
             opacity: 0.9;
             font-weight: 300;
             position: relative;
@@ -375,8 +388,24 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            .logo-container {
+                position: relative;
+                left: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .header-text-container {
+                padding-left: 0;
+            }
+            
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             .welcome-text h2 {
@@ -384,9 +413,9 @@
             }
             
             .profile-button {
-                height: 200px; /* Réduit de 250px à 200px */
-                width: 200px; /* Ajout d'une largeur fixe pour mobile */
-                padding: 2rem 1rem; /* Réduit le padding */
+                height: 200px;
+                width: 200px;
+                padding: 2rem 1rem;
             }
         }
 
@@ -450,11 +479,14 @@
     <header>
         <div class="logo-container">
             <div class="logo">
-                <img src="logo.png" alt="Logo Université">
+                <img src="logo-universite.png" alt="Logo Université">
             </div>
         </div>
-        <h1 class="animated">Espace Numérique de Travail</h1>
-        <p class="subtitle animated delay-1">Votre portail vers l'excellence académique et les ressources numériques</p>
+        
+        <div class="header-text-container">
+            <h1 class="animated">Espace Numérique Universitaire</h1>
+            <p class="subtitle animated delay-1">Votre portail vers l'excellence académique et les ressources numériques</p>
+        </div>
     </header>
 
     <main>
@@ -464,7 +496,7 @@
         </div>
 
         <div class="button-container">
-            <button class="profile-button button-etudiant animated delay-2" onclick="location.href='student2.html'">
+            <button class="profile-button button-etudiant animated delay-2" onclick="location.href='etudiant.html'">
                 <div class="button-content">
                     <div class="button-icon">
                         <i class="fas fa-user-graduate"></i>
@@ -473,7 +505,7 @@
                 </div>
             </button>
             
-            <button class="profile-button button-enseignant animated delay-3" onclick="location.href='newenseignatpage.html'">
+            <button class="profile-button button-enseignant animated delay-3" onclick="location.href='enseignant.html'">
                 <div class="button-content">
                     <div class="button-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
@@ -482,7 +514,7 @@
                 </div>
             </button>
             
-            <button class="profile-button button-doctorant animated delay-3" onclick="location.href='newdoctorantpage.html'">
+            <button class="profile-button button-doctorant animated delay-3" onclick="location.href='doctorant.html'">
                 <div class="button-content">
                     <div class="button-icon">
                         <i class="fas fa-microscope"></i>
@@ -491,7 +523,7 @@
                 </div>
             </button>
             
-            <button class="profile-button button-ats animated delay-4" onclick="location.href='newatspage.html'">
+            <button class="profile-button button-ats animated delay-4" onclick="location.href='ats.html'">
                 <div class="button-content">
                     <div class="button-icon">
                         <i class="fas fa-briefcase"></i>
