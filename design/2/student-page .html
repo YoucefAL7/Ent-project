@@ -105,10 +105,42 @@
       gap: 1rem;
     }
 
-    .nav-menu {
-      display: flex;
-      gap: 0.75rem;
-    }
+    /* Nouvelles règles pour positionner nav-menu sous le header */
+.nav-menu {
+  display: flex;
+  gap: 0.75rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--card-light);
+  padding: 0.75rem 2rem;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  z-index: 900;
+}
+
+body.dark .nav-menu {
+  background-color: var(--card-dark);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustement pour le conteneur principal pour éviter que le contenu ne soit caché sous la nav */
+main.container {
+  margin-top: 60px; /* Ajustez cette valeur selon la hauteur de votre nav-menu */
+}
+
+/* Modification des items de nav pour s'adapter à la nouvelle disposition */
+.nav-item {
+  position: relative;
+}
+
+/* Ajustement de la position des dropdowns */
+.dropdown-content {
+  top: calc(100% + 0.5rem);
+}
+
+
 
     .nav-link {
       text-decoration: none;
@@ -514,6 +546,7 @@
     body.dark .card-text {
       color: #94a3b8;
     }
+
 
     .announcements {
       background-color: var(--card-light);
@@ -938,7 +971,7 @@ body.dark .entry-form .form-control {
     <div class="header-container">
       <div class="logo-container">
         <img src="logo.png" alt="Logo USTHB" class="logo">
-        <span class="university-name">ENT USTHB</span>
+        <span class="university-name">ENT USTHB - Espace Etudiant</span>
       </div>
       
       <nav class="nav-container">
