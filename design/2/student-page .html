@@ -105,25 +105,12 @@
       gap: 1rem;
     }
 
-    /* Nouvelles règles pour positionner nav-menu sous le header */
-.nav-menu {
-  display: flex;
-  gap: 0.75rem;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: var(--card-light);
-  padding: 0.75rem 2rem;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  z-index: 900;
-}
-
-body.dark .nav-menu {
-  background-color: var(--card-dark);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
+    
+    .nav-menu {
+      position: relative;
+      display: flex;
+      gap: 1rem;
+    }
 
 /* Ajustement pour le conteneur principal pour éviter que le contenu ne soit caché sous la nav */
 main.container {
@@ -983,7 +970,7 @@ body.dark .entry-form .form-control {
           <li class="nav-item">
             <a href="#dashboard" class="nav-link">
               <i class="fas fa-home"></i>
-              Tableau de bord
+              Acceuil
             </a>
           </li>
           <li class="nav-item dropdown">
@@ -1001,21 +988,9 @@ body.dark .entry-form .form-control {
             </div>
           </li>
           <li class="nav-item">
-            <a href="#actualites" class="nav-link">
-              <i class="fas fa-newspaper"></i>
-              Actualités
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="#annonces" class="nav-link">
               <i class="fas fa-bullhorn"></i>
               Annonces
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#help" class="nav-link">
-              <i class="fas fa-question-circle"></i>
-              Aide
             </a>
           </li>
         </ul>
@@ -1049,7 +1024,7 @@ body.dark .entry-form .form-control {
     <div class="mobile-nav-links">
       <a href="#dashboard" class="mobile-nav-link">
         <i class="fas fa-home"></i>
-        Tableau de bord
+        Acceuil
       </a>
       
       <a href="#mon-cursus" class="mobile-nav-link">
@@ -1077,19 +1052,9 @@ body.dark .entry-form .form-control {
         Messagerie
       </a>
       
-      <a href="#actualites" class="mobile-nav-link">
-        <i class="fas fa-newspaper"></i>
-        Actualités
-      </a>
-      
       <a href="#annonces" class="mobile-nav-link">
         <i class="fas fa-bullhorn"></i>
         Annonces
-      </a>
-      
-      <a href="#help" class="mobile-nav-link">
-        <i class="fas fa-question-circle"></i>
-        Aide
       </a>
     </div>
     
