@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة إدارة قائمة ATS</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #f8f9fa; }
+    h1 { margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 6px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 15px; padding: 10px 16px; background: #17a2b8; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #138496; }
+    .section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .preview { background: #f1f1f1; padding: 12px; border-radius: 6px; margin-top: 15px; white-space: pre-wrap; direction: ltr; font-family: monospace; }
+    textarea { height: 80px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>🛠️ لوحة إدارة "Menu Administratif"</h1>
+
+  <!-- قسم إضافة أو تعديل عنصر -->
+  <div class="section">
+    <h3>➕ إضافة أو تحديث عنصر قائمة</h3>
+    <label>النص الظاهر</label>
+    <input id="itemText" placeholder="مثال: Votre Profil" />
+
+    <label>أيقونة Font Awesome</label>
+    <input id="itemIcon" placeholder="مثال: fas fa-user" />
+
+    <label>الرابط (href)</label>
+    <input id="itemLink" placeholder="مثال: /profile" />
+
+    <!-- ألوان منفصلة -->
+    <label>لون الأيقونة</label>
+    <input id="iconColor" placeholder="مثال: #007bff" />
+
+    <label>لون النص</label>
+    <input id="textColor" placeholder="مثال: #333333" />
+
+    <label>لون الخلفية</label>
+    <input id="backgroundColor" placeholder="مثال: #e0e0e0" />
+
+    <label>ترتيب الظهور</label>
+    <input id="itemOrder" type="number" min="1" value="1" />
+
+    <button onclick="submitItemUpdate()">✨ إرسال إلى الذكاء الاصطناعي</button>
+  </div>
+
+  <!-- قسم الحذف -->
+  <div class="section">
+    <h3>🗑 حذف عنصر</h3>
+    <label>النص الخاص بالعنصر</label>
+    <input id="deleteItemText" placeholder="مثال: Votre Profil" />
+    <button onclick="deleteItem()">🗑 حذف</button>
+  </div>
+
+  <!-- ترتيب يدوي -->
+  <div class="section">
+    <h3>📋 ترتيب يدوي للعناصر</h3>
+    <label>اكتب النصوص بالترتيب المطلوب (واحد في كل سطر)</label>
+    <textarea id="manualOrderBox" placeholder="Votre Profil\nCompte Wifi\nDossier CSF"></textarea>
+    <button onclick="applyManualOrder()">📤 حفظ الترتيب</button>
+  </div>
+
+  <!-- عرض الكود الحالي -->
+  <div class="section">
+    <h3>🔎 معاينة الكود الحالي للقائمة</h3>
+    <div class="preview" id="menuPreview"></div>
+  </div>
+
+  <script>
+    // تحميل الكود الحالي للقائمة عند فتح الصفحة
+    async function loadMenuPreview() {
+      const res = await fetch('/api/ats-menu/snippet');
+      const html = await res.text();
+      document.getElementById('menuPreview').textContent = html;
+      loadTitlesToTextarea(html);
+    }
+
+    // استخراج العناوين من الكود وتحويلها لقائمة نصوص قابلة للترتيب يدوي
+    function loadTitlesToTextarea(htmlContent) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, 'text/html');
+      const items = Array.from(doc.querySelectorAll('.menu-item span')).map(el => el.textContent.trim());
+      document.getElementById('manualOrderBox').value = items.join('\n');
+    }
+
+    // إرسال عنصر جديد أو تعديل عنصر موجود إلى GPT
+    async function submitItemUpdate() {
+      const text = document.getElementById('itemText').value.trim();
+      const icon = document.getElementById('itemIcon').value.trim();
+      const link = document.getElementById('itemLink').value.trim();
+      const iconColor = document.getElementById('iconColor').value.trim();
+      const textColor = document.getElementById('textColor').value.trim();
+      const backgroundColor = document.getElementById('backgroundColor').value.trim();
+      const order = parseInt(document.getElementById('itemOrder').value);
+
+      const current = await fetch('/api/ats-menu/snippet').then(r => r.text());
+
+      // بناء البرومبت لإرساله إلى GPT
+      const instructions = `
+أضف أو حدث عنصر في الكود التالي بمواصفات:
+- النص: ${text}
+- الرابط: ${link}
+- الأيقونة: ${icon}
+- الترتيب: ${order}
+- لون الأيقونة: ${iconColor || 'كما هو'}
+- لون النص: ${textColor || 'كما هو'}
+- لون الخلفية: ${backgroundColor || 'كما هي'}
+
+كل عنصر يجب أن يكون على الشكل:
+<a href="${link}" class="menu-item"${backgroundColor ? ` style=\"background-color: ${backgroundColor};\"` : ''}>
+  <i class="${icon}"${iconColor ? ` style=\"color: ${iconColor};\"` : ''}></i>
+  <span${textColor ? ` style=\"color: ${textColor};\"` : ''}>${text}</span>
+</a>
+
+ثم رتب جميع العناصر حسب الترتيب المحدد.
+أعد HTML فقط بدون تعليقات أو شرح.
+`;
+
+      const res = await fetch('/api/generate-ats-menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `${current}\n\n${instructions}` })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('menuPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ تم التحديث بنجاح');
+    }
+
+    // حذف عنصر بناءً على عنوانه فقط
+    async function deleteItem() {
+      const text = document.getElementById('deleteItemText').value.trim();
+      const current = await fetch('/api/ats-menu/snippet').then(r => r.text());
+
+      const prompt = `
+احذف العنصر الذي يحتوي على <span>${text}</span> فقط من الكود التالي.
+أعد HTML فقط بدون أي شرح:
+${current}
+`;
+
+      const res = await fetch('/api/generate-ats-menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('menuPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ تم الحذف بنجاح');
+    }
+
+    // ترتيب العناصر بناءً على الإدخال النصي اليدوي
+    async function applyManualOrder() {
+      const manualOrderRaw = document.getElementById('manualOrderBox').value.trim();
+      if (!manualOrderRaw) return alert('⚠️ الرجاء إدخال ترتيب العناصر.');
+      const ordered = manualOrderRaw.split('\n').map(l => l.trim()).filter(Boolean);
+      const current = await fetch('/api/ats-menu/snippet').then(r => r.text());
+
+      const prompt = `
+في الكود التالي توجد عناصر قائمة (<a class="menu-item">...) تحتوي على <span>.
+رتب العناصر حسب هذا الترتيب:
+${ordered.map((t,i) => `${i+1}- ${t}`).join('\n')}
+أعد HTML فقط دون تعديل أي محتوى أو إضافة شرح:
+${current}
+`;
+
+      const res = await fetch('/api/generate-ats-menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('menuPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ تم حفظ الترتيب بنجاح');
+    }
+
+    // تحميل الكود مباشرة عند فتح الصفحة
+    loadMenuPreview();
+  </script>
+</body>
+</html>

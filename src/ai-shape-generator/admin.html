@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة التحكم - القائمة الجانبية</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #f8f9fa; }
+    h1 { margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 6px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 15px; padding: 10px 16px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    textarea { height: 80px; font-family: monospace; }
+    .preview { background: #f1f1f1; padding: 12px; border-radius: 6px; margin-top: 15px; white-space: pre-wrap; direction: ltr; }
+  </style>
+</head>
+<body>
+  <h1>👨‍💻 لوحة إدارة القائمة الجانبية</h1>
+
+  <div class="section">
+    <h3>➕ إضافة أو تحديث مجموعة (Menu)</h3>
+    <label>العنوان الكبير (مثال: مينيو 1)</label>
+    <input id="mainTitle" placeholder="مثال: مينيو 3" />
+
+    <label>أيقونة المجموعة (مثال: fas fa-book)</label>
+    <input id="mainIcon" placeholder="مثال: fas fa-folder" />
+
+    <label>لون الخلفية (مثال: #e0f7fa)</label>
+    <input id="mainColor" placeholder="#d1e7dd" />
+
+    <label>ترتيب الظهور (رقم)</label>
+    <input id="mainOrder" type="number" min="1" value="1" />
+
+    <label>العناوين الصغيرة (واحد في كل سطر: النص | الرابط | الأيقونة | اللون)</label>
+    <textarea id="subItems" placeholder="البحث العلمي|/recherche|fas fa-microscope|#336699"></textarea>
+
+    <button onclick="submitUpdate()">✨ إرسال التعديل للذكاء الاصطناعي</button>
+  </div>
+
+  <div class="section">
+    <h3>🗑 حذف مجموعة كاملة</h3>
+    <label>اسم المجموعة (العنوان الكبير)</label>
+    <input id="deleteTitle" placeholder="مثال: مينيو 2" />
+    <button onclick="deleteGroup()">🗑 حذف</button>
+  </div>
+
+  <div class="section">
+    <h3>🔎 معاينة الكود الحالي</h3>
+    <div class="preview" id="preview"></div>
+  </div>
+
+  <script>
+    async function loadPreview() {
+      const res = await fetch('/api/menu/snippet');
+      const html = await res.text();
+      document.getElementById('preview').textContent = html;
+    }
+
+    async function submitUpdate() {
+      const mainTitle = document.getElementById('mainTitle').value.trim();
+      const mainIcon = document.getElementById('mainIcon').value.trim();
+      const mainColor = document.getElementById('mainColor').value.trim();
+      const mainOrder = parseInt(document.getElementById('mainOrder').value);
+      const subItemsRaw = document.getElementById('subItems').value.trim();
+
+      const subItems = subItemsRaw.split('\n').map(line => {
+        const [text, href, icon, color] = line.split('|').map(s => s.trim());
+        return { text, href, icon, color };
+      });
+
+      const current = await fetch('/api/menu/snippet').then(r => r.text());
+
+      const instructions = `يرجى تعديل الكود التالي بإضافة أو تحديث مجموعة بعنوان "${mainTitle}" بترتيب ${mainOrder}.
+لون الخلفية: ${mainColor}، الأيقونة: ${mainIcon}.
+العناصر:
+${subItems.map(item => `- "${item.text}" | ${item.href} | ${item.icon} | ${item.color}`).join('\n')}
+ثم إعادة ترتيب المجموعات حسب ترتيبها، مع الحفاظ على البنية التالية لكل مجموعة:
+<div class="sidebar-card" style="background-color:[لون المجموعة]">
+  <div class="section-title">
+    <i class="[أيقونة]" style="float:left; margin-right:8px;"></i> [عنوان]
+  </div>
+  <ul>
+    <li style="color:[لون]">
+      <i class="[أيقونة]" style="float:left; margin-right:6px;"></i> [النص]
+    </li>
+  </ul>
+</div>
+احذف أي مجموعة غير مذكورة.`;
+
+      const finalPrompt = `${current}\n\nالتعليمات:\n${instructions}`;
+
+      const res = await fetch('/api/generate-menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: finalPrompt })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('preview').textContent = newCode;
+      alert('✅ تم التحديث بنجاح');
+    }
+
+    async function deleteGroup() {
+      const groupName = document.getElementById('deleteTitle').value.trim();
+      const res = await fetch('/api/menu/delete-by-name', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ groupName })
+      });
+      const data = await res.json();
+      alert(data.message);
+      loadPreview();
+    }
+
+    loadPreview();
+  </script>
+</body>
+</html>

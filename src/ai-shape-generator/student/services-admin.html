@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Services Dashboard</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #f8f9fa; }
+    h1 { margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; padding: 6px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 15px; padding: 10px 16px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #218838; }
+    .section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    textarea { height: 80px; font-family: monospace; }
+    .preview { background: #f1f1f1; padding: 12px; border-radius: 6px; margin-top: 15px; white-space: pre-wrap; direction: ltr; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>🎓 Student Services Management Panel</h1>
+
+  <!-- Add or Update -->
+  <div class="section">
+    <h3>➕ Add or Update a Service</h3>
+    <label>Service Name</label>
+    <input id="serviceTitle" placeholder="e.g.: Messagerie" />
+
+    <label>Icon (e.g.: fas fa-envelope)</label>
+    <input id="serviceIcon" placeholder="e.g.: fas fa-envelope" />
+
+    <label>Description</label>
+    <textarea id="serviceDescription" placeholder="e.g.: Communicate with your instructors..."></textarea>
+
+    <label>Link on Click</label>
+    <input id="serviceLink" placeholder="e.g.: /documents" />
+
+    <label>Icon Color (e.g.: #f39c12)</label>
+    <input id="serviceColor" placeholder="#f39c12" />
+
+    <label>Display Order</label>
+    <input id="serviceOrder" type="number" min="1" value="1" />
+
+    <button onclick="submitServicesUpdate()">✨ Submit to AI</button>
+  </div>
+
+  <!-- Delete -->
+  <div class="section">
+    <h3>🗑 Delete a Service</h3>
+    <label>Service Name</label>
+    <input id="deleteServiceTitle" placeholder="e.g.: Messagerie" />
+    <button onclick="deleteService()">🗑 Delete</button>
+  </div>
+
+  <!-- Manual Order -->
+  <div class="section">
+    <h3>📋 Manually Reorder Services</h3>
+    <label>Enter service titles in the desired order (one per line)</label>
+    <textarea id="manualOrderBox" placeholder="Messagerie\nDocuments\nEmploi du Temps"></textarea>
+    <button onclick="applyManualOrder()">📤 Save New Order</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="section">
+    <h3>🔎 Current Code Preview (HTML)</h3>
+    <div class="preview" id="servicesPreview"></div>
+  </div>
+
+  <script>
+    async function loadServicesPreview() {
+      const res = await fetch('/api/services/snippet');
+      const html = await res.text();
+      document.getElementById('servicesPreview').textContent = html;
+      loadTitlesToTextarea(html);
+    }
+
+    function loadTitlesToTextarea(htmlContent) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
+      const titles = Array.from(doc.querySelectorAll('.card-title')).map(el => el.textContent.trim());
+      document.getElementById('manualOrderBox').value = titles.join('\n');
+    }
+
+    async function submitServicesUpdate() {
+      const title = document.getElementById('serviceTitle').value.trim();
+      const icon = document.getElementById('serviceIcon').value.trim();
+      const description = document.getElementById('serviceDescription').value.trim();
+      const order = parseInt(document.getElementById('serviceOrder').value);
+      const link = document.getElementById('serviceLink').value.trim();
+      const color = document.getElementById('serviceColor').value.trim();
+
+      const current = await fetch('/api/services/snippet').then(r => r.text());
+
+      const instructions = `
+Please modify the following code by adding or updating a service with the title "${title}" and order ${order}.
+Icon: ${icon}
+Icon Color: ${color}
+Link: ${link}
+Description: ${description}
+
+Each service should follow this structure:
+<a href="${link}" class="card" style="text-decoration: none;">
+  <div class="card-accent"></div>
+  <div class="card-body">
+    <div class="card-icon" style="color: ${color}; background-color: rgba(0,0,0,0.05);">
+      <i class="${icon}"></i>
+    </div>
+    <h3 class="card-title">${title}</h3>
+    <p class="card-text">${description}</p>
+  </div>
+</a>
+
+Then reorder all services based on the given order. Leave other services unchanged.
+Also, return only the clean HTML code without any comments or explanations.
+`;
+
+      const res = await fetch('/api/generate-services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `${current}\n\nInstructions:\n${instructions}` })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('servicesPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ Update successful');
+    }
+
+    async function deleteService() {
+      const title = document.getElementById('deleteServiceTitle').value.trim();
+      const current = await fetch('/api/services/snippet').then(r => r.text());
+
+      const prompt = `
+In the following code, delete any element that contains <h3 class="card-title">${title}</h3>, whether it's inside a <div class="card"> or <a class="card">.
+Also, return only the clean HTML code without any comments.
+
+${current}
+`;
+
+      const res = await fetch('/api/generate-services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('servicesPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ Service deleted');
+    }
+
+    async function applyManualOrder() {
+      const manualOrderRaw = document.getElementById('manualOrderBox').value.trim();
+      if (!manualOrderRaw) return alert("⚠️ Please enter the desired service order.");
+
+      const orderedTitles = manualOrderRaw.split('\n').map(line => line.trim()).filter(Boolean);
+      const current = await fetch('/api/services/snippet').then(r => r.text());
+
+      const prompt = `
+The following HTML code contains service cards (<div> or <a> with class="card"), each having a title inside <h3 class="card-title">.
+
+Reorder these cards according to the following titles:
+${orderedTitles.map((t, i) => `${i + 1}- ${t}`).join('\n')}
+
+Do not change content or structure—only reorder as specified.
+Also, return only the clean HTML code without any comments.
+
+Code:
+${current}
+`;
+
+      const res = await fetch('/api/generate-services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+
+      const newCode = await res.text();
+      document.getElementById('servicesPreview').textContent = newCode;
+      loadTitlesToTextarea(newCode);
+      alert('✅ Order saved successfully');
+    }
+
+    loadServicesPreview();
+  </script>
+</body>
+</html>
