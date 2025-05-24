@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Espace ATS - USTHB</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <style>
     :root {
       --primary: #5e35b1;
       --primary-dark: #4527a0;
@@ -23,6 +12,10 @@
       --shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       --accent: #9c27b0;
       --accent-light: #ba68c8;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+      --header-height: 80px;
     }
 
     * {
@@ -39,6 +32,7 @@
       display: flex;
       flex-direction: column;
       transition: all 0.3s ease;
+      padding-top: var(--header-height);
     }
 
     body.dark {
@@ -56,6 +50,12 @@
       padding: 1rem 2rem;
       box-shadow: var(--shadow-light);
       transition: all 0.3s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      z-index: 1000;
     }
 
     body.dark header {
@@ -67,6 +67,19 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+    }
+
+    .logo {
+      height: 48px;
+      width: auto;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 4px;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     .university-name {
@@ -141,6 +154,11 @@
       box-shadow: var(--shadow-light);
       transition: all 0.3s ease;
       z-index: 10;
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
     }
 
     body.dark .sidebar {
@@ -220,6 +238,7 @@
       padding: 2rem;
       display: flex;
       flex-direction: column;
+      margin-left: 280px;
     }
 
     .welcome-section {
@@ -328,6 +347,88 @@
       }
     }
 
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .action-card {
+      background-color: var(--card-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    body.dark .action-card {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark .action-card:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .action-icon.primary {
+      background-color: var(--primary);
+    }
+
+    .action-icon.success {
+      background-color: var(--success);
+    }
+
+    .action-icon.warning {
+      background-color: var(--warning);
+    }
+
+    .action-icon.info {
+      background-color: var(--info);
+    }
+
+    .action-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    body.dark .action-title {
+      color: var(--accent-light);
+    }
+
+    .action-description {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    body.dark .action-description {
+      color: var(--text-dark);
+    }
+
     /* Announcements Section */
     .announcements {
       background-color: var(--card-light);
@@ -367,17 +468,211 @@
 
     .announcements-content {
       padding: 1.5rem;
-      text-align: center;
     }
 
-    .no-announcements {
-      padding: 2rem 0;
+    .announcement-item {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    body.dark .announcement-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .announcement-item:last-child {
+      border-bottom: none;
+    }
+
+    .announcement-item:hover {
+      background-color: rgba(94, 53, 177, 0.05);
+    }
+
+    body.dark .announcement-item:hover {
+      background-color: rgba(186, 104, 200, 0.05);
+    }
+
+    .announcement-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+    }
+
+    body.dark .announcement-title {
+      color: var(--accent-light);
+    }
+
+    .announcement-date {
+      font-size: 0.8rem;
       color: #6c757d;
-      font-style: italic;
+      margin-bottom: 0.5rem;
     }
 
-    body.dark .no-announcements {
+    body.dark .announcement-date {
       color: #adb5bd;
+    }
+
+    .announcement-text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .announcement-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .badge-new {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .badge-important {
+      background-color: var(--warning);
+      color: white;
+    }
+
+    .badge-info {
+      background-color: var(--info);
+      color: white;
+    }
+
+    /* News Ticker */
+    .news-ticker {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-light);
+    }
+
+    body.dark .news-ticker {
+      background-color: var(--primary-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .ticker-container {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ticker-label {
+      font-weight: 600;
+      margin-right: 1rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-label i {
+      margin-right: 0.5rem;
+    }
+
+    .ticker-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker-list {
+      list-style: none;
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      animation: ticker-scroll 30s linear infinite;
+    }
+
+    @keyframes ticker-scroll {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      margin-right: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .ticker-item a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .ticker-item a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: var(--card-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    body.dark .stat-card {
+      background-color: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .stat-title {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+    }
+
+    body.dark .stat-title {
+      color: #adb5bd;
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    body.dark .stat-value {
+      color: var(--accent-light);
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .stat-change.up {
+      color: var(--success);
+    }
+
+    .stat-change.down {
+      color: #f44336;
     }
 
     /* Footer */
@@ -390,6 +685,7 @@
       color: #6c757d;
       box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
       transition: all 0.3s ease;
+      margin-left: 280px;
     }
 
     body.dark footer {
@@ -418,9 +714,9 @@
     @media (max-width: 900px) {
       .sidebar {
         position: fixed;
-        top: 0;
+        top: var(--header-height);
         left: -280px;
-        height: 100%;
+        height: calc(100vh - var(--header-height));
         transition: left 0.3s ease;
       }
 
@@ -428,12 +724,16 @@
         left: 0;
       }
 
-      .menu-toggle {
-        display: block;
+      .content-area {
+        margin-left: 0;
       }
 
-      .main-container {
-        flex-direction: column;
+      footer {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
       }
 
       .welcome-section {
@@ -458,6 +758,10 @@
         bottom: 0;
         background: linear-gradient(to right, var(--primary), var(--accent));
       }
+
+      .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 640px) {
@@ -467,6 +771,10 @@
 
       .university-name {
         font-size: 1rem;
+      }
+
+      .logo {
+        height: 36px;
       }
 
       .user-profile span {
@@ -484,13 +792,33 @@
       .welcome-title {
         font-size: 1.5rem;
       }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-section {
+        grid-template-columns: 1fr;
+      }
+
+      .news-ticker {
+        padding: 0.75rem 1rem;
+      }
+
+      .ticker-label {
+        font-size: 0.8rem;
+      }
+
+      .ticker-item {
+        font-size: 0.8rem;
+      }
     }
 
     /* Overlay for mobile menu */
     .sidebar-overlay {
       display: none;
       position: fixed;
-      top: 0;
+      top: var(--header-height);
       left: 0;
       right: 0;
       bottom: 0;
@@ -501,129 +829,3 @@
     .sidebar-overlay.active {
       display: block;
     }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo-container">
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <span class="university-name">Espace Numérique de Travail – USTHB</span>
-    </div>
-    
-    <div class="header-controls">
-      <button class="theme-toggle" id="toggleTheme" title="Changer le thème">
-        <i class="fas fa-moon"></i>
-      </button>
-      
-      <div class="user-profile">
-        <div class="avatar">A</div>
-        <span>ATS</span>
-      </div>
-    </div>
-  </header>
-
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-  
-  <div class="main-container">
-    <div class="sidebar" id="sidebar">
-      <div class="menu-title">Menu</div>
-      <a href="#" class="menu-item"><i class="fas fa-user"></i><span>Voir le profil</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-wifi"></i><span>Compte Wifi</span></a>
-      <a href="#" class="menu-item active"><i class="fas fa-folder-open"></i><span>Dossier csf</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-database"></i><span>Accès Proquest</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-cogs"></i><span>Techniques de l'ingénieur</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-gavel"></i><span>Textes Règlementaires</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-flask"></i><span>Stage scientifique</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-briefcase"></i><span>Stage de perfectionnement</span></a>
-    </div>
-
-    <div class="content-area">
-      <section class="welcome-section">
-        <div class="welcome-accent"></div>
-        <div class="welcome-content">
-          <h1 class="welcome-title">Bienvenue à votre espace ATS</h1>
-          <p class="welcome-subtitle">Gérez vos ressources administratives et accédez à tous les services numériques de l'USTHB.</p>
-        </div>
-        <div class="illustration-container">
-          <img src="admin-illustration.png" alt="Responsable administratif" class="illustration" />
-        </div>
-      </section>
-
-      <section class="announcements">
-        <div class="section-header">
-          <h2 class="section-title">Annonces Récentes</h2>
-        </div>
-        <div class="announcements-content">
-          <p class="no-announcements">Aucune nouvelle annonce pour le moment.</p>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB
-  </footer>
-
-  <script>
-    // Thème sombre/clair
-    const toggleBtn = document.getElementById("toggleTheme");
-    const body = document.body;
-
-    function setTheme(theme) {
-      if (theme === "dark") {
-        body.classList.add("dark");
-        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-      } else {
-        body.classList.remove("dark");
-        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-      }
-    }
-
-    toggleBtn.addEventListener("click", () => {
-      const isDark = body.classList.toggle("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-      setTheme(isDark ? "dark" : "light");
-    });
-
-    // Charge le thème sauvegardé
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-
-    // Menu mobile
-    const menuToggle = document.getElementById("menuToggle");
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("sidebarOverlay");
-
-    menuToggle.addEventListener("click", () => {
-      sidebar.classList.toggle("active");
-      overlay.classList.toggle("active");
-    });
-
-    overlay.addEventListener("click", () => {
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    // Fermer le menu au clic sur un lien (pour mobile)
-    const menuItems = document.querySelectorAll(".menu-item");
-    menuItems.forEach(item => {
-      item.addEventListener("click", () => {
-        if (window.innerWidth <= 900) {
-          sidebar.classList.remove("active");
-          overlay.classList.remove("active");
-        }
-      });
-    });
-
-    // Ajuster le sidebar lors du redimensionnement
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 900) {
-        sidebar.classList.remove("active");
-        overlay.classList.remove("active");
-      }
-    });
-  </script>
-</body>
-</html>

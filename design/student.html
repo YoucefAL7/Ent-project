@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENT USTHB - Espace Étudiant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="student.css">
+
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="logo.jpg" alt="Logo USTHB" class="logo">
+        <span class="university-name">ENT USTHB - Espace Etudiant</span>
+      </div>
+      
+      <nav class="nav-container">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link">
+              <i class="fas fa-home"></i>
+              Acceuil
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#services" class="nav-link">
+              <i class="fas fa-th-large"></i>
+              Services
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-content">
+              <a href="#mon-cursus" class="dropdown-item">Mon Cursus</a>
+              <a href="#emploi-du-temps" class="dropdown-item">Emploi du Temps</a>
+              <a href="#documents" class="dropdown-item">Documents Pédagogiques</a>
+              <a href="#bibliotheque" class="dropdown-item">Bibliothèque</a>
+              <a href="#messagerie" class="dropdown-item">Messagerie</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="#annonces" class="nav-link">
+              <i class="fas fa-bullhorn"></i>
+              Annonces
+            </a>
+          </li>
+        </ul>
+        
+        <div class="header-controls">
+          <button class="theme-toggle" id="toggleTheme" title="Changer le thème">
+            <i class="fas fa-moon"></i>
+          </button>
+          
+          <div class="user-profile">
+            <div class="avatar">E</div>
+            <span>Étudiant</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo USTHB" class="logo">
+        <span class="university-name">ENT USTHB</span>
+      </div>
+      <button class="menu-toggle" id="closeMobileNav">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-nav-links">
+      <a href="#dashboard" class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        Acceuil
+      </a>
+      
+      <a href="#mon-cursus" class="mobile-nav-link">
+        <i class="fas fa-user-graduate"></i>
+        Mon Cursus
+      </a>
+      
+      <a href="#emploi-du-temps" class="mobile-nav-link">
+        <i class="fas fa-calendar-alt"></i>
+        Emploi du Temps
+      </a>
+      
+      <a href="#documents" class="mobile-nav-link">
+        <i class="fas fa-book-open"></i>
+        Documents Pédagogiques
+      </a>
+      
+      <a href="#bibliotheque" class="mobile-nav-link">
+        <i class="fas fa-university"></i>
+        Bibliothèque
+      </a>
+      
+      <a href="#messagerie" class="mobile-nav-link">
+        <i class="fas fa-envelope"></i>
+        Messagerie
+      </a>
+      
+      <a href="#annonces" class="mobile-nav-link">
+        <i class="fas fa-bullhorn"></i>
+        Annonces
+      </a>
+    </div>
+    
+    <div class="mobile-nav-footer">
+      <div class="user-profile">
+        <div class="avatar">E</div>
+        <span>Étudiant</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="welcome-section">
+      <div class="welcome-text">
+        <h1 class="welcome-title">Bienvenue sur votre Espace Numérique de Travail</h1>
+        <p class="welcome-subtitle">Accédez à toutes les ressources numériques et suivez vos études à l'USTHB facilement. Consultez vos cours, documents pédagogiques et restez informé des actualités de l'université.</p>
+        <div class="welcome-actions">
+          <a href="#services" class="btn btn-primary">
+            <i class="fas fa-rocket"></i>
+            Commencer
+          </a>
+          <a href="#help" class="btn btn-outline">
+            <i class="fas fa-question-circle"></i>
+            Guide d'utilisation
+          </a>
+        </div>
+      </div>
+      
+      <div class="illustration-container">
+        <div class="circle-animation"></div>
+        <img src="student-colored.png" alt="Illustration étudiant" class="illustration" />
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    
+
+    <!-- Services Section -->
+    <section id="services">
+      <h2 class="section-title">Mes Services</h2>
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3 class="card-title">Mon Cursus</h3>
+            <p class="card-text">Consultez votre parcours académique, votre emploi du temps et vos résultats.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3 class="card-title">Annonces</h3>
+            <p class="card-text">Restez informé des dernières actualités et communications officielles.</p>
+            
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="card-title">Emplois du Temps</h3>
+            <p class="card-text">Consultez votre planning des cours et des séances de travaux pratiques.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3 class="card-title">Documents Pédagogiques</h3>
+            <p class="card-text">Accédez à vos supports de cours, TD et TP pour chaque matière.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h3 class="card-title">Bibliothèque EBSCO</h3>
+            <p class="card-text">Accédez à des milliers de ressources et publications scientifiques.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="card-title">Résultat Orientation</h3>
+            <p class="card-text">Consultez les résultats d'orientation et d'affectation par filière.</p>
+           
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3 class="card-title">Messagerie</h3>
+            <p class="card-text">Communiquez avec vos enseignants et collègues via la messagerie interne.</p>
+            
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-accent"></div>
+          <div class="card-body">
+            <div class="card-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3 class="card-title">Fichiers Cloud</h3>
+            <p class="card-text">Stockez et partagez vos fichiers personnels dans votre espace de stockage.</p>
+           
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section id="announcements">
+      <div class="announcements">
+        <div class="announcements-header">
+          <h2 class="announcements-title">Dernières annonces</h2>
+          <a href="#" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="announcement-list">
+          <div class="announcement-item">
+            <h3 class="announcement-title">Emploi du temps semestre 2 disponible</h3>
+            <div class="announcement-meta">
+              <span>Scolarité</span>
+              <span>Il y a 2 jours</span>
+            </div>
+          </div>
+          
+          <div class="announcement-item">
+            <h3 class="announcement-title">Reports des TPs d'algorithmique</h3>
+            <div class="announcement-meta">
+              <span>Département Informatique</span>
+              <span>Il y a 3 jours</span>
+            </div>
+          </div>
+          
+          <div class="announcement-item">
+            <h3 class="announcement-title">Examens de rattrapage - Dates et modalités</h3>
+            <div class="announcement-meta">
+              <span>Vice Rectorat</span>
+              <span>Il y a 1 semaine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+
+    <!-- Évaluation d'entrée -->
+<section class="entry-form">
+<h2 class="section-title">
+  <i class="fas fa-clipboard-check"></i>
+  Formulaire de plainte
+</h2>
+<p>Un souci à signaler ? Remplis ce formulaire pour nous faire part de ta plainte ou d’un problème rencontré à l’université. On s’engage à te répondre rapidement et à trouver une solution..</p>
+<form action="#" method="post" class="mt-4">
+  <div class="form-group">
+    <label for="major">Votre filière</label>
+    <select class="form-control" id="major">
+      <option>Informatique</option>
+      <option>Mathématiques</option>
+      <option>Physique</option>
+      <option>Chimie</option>
+      <option>Biologie</option>
+      <option>Génie Civil</option>
+      <option>Électronique</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="major">Liste de plainte</label>
+    <select class="form-control" id="major">
+      <option>problème avec anseignant</option>
+      <option>problème de notes</option>
+      <option>conflit avec un autre Etudiant</option>
+      <option>problème administratif</option>
+      <option>problème lie a la securite</option>
+      <option>Autre(a preciser dans la description)</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="expectations">description</label>
+    <textarea class="form-control" id="expectations" rows="3" placeholder="decriver votre plainte..."></textarea>
+  </div>
+  
+  <button type="submit" class="btn-submit">Soumettre</button>
+</form>
+</section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Mentions légales</a>
+      <a href="#" class="footer-link">Contact</a>
+      <a href="#" class="footer-link">FAQ</a>
+      <a href="#" class="footer-link">Plan du site</a>
+    </div>
+    <p>&copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    function setTheme(theme) {
+      if (theme === "dark") {
+        body.classList.add("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        toggleBtn.setAttribute("title", "Passer en mode clair");
+      } else {
+        body.classList.remove("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        toggleBtn.setAttribute("title", "Passer en mode sombre");
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      setTheme(isDark ? "dark" : "light");
+    });
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+
+    // Mobile Navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const closeMobileNav = document.getElementById("closeMobileNav");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+
+    closeMobileNav.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+
+    // Close mobile nav when clicking on a link
+    document.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+
+    // Card click functionality
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", function() {
+        // You can add specific functionality here based on the card
+        // For now, we'll just log which card was clicked
+        const cardTitle = this.querySelector(".card-title").textContent;
+        console.log(`Card clicked: ${cardTitle}`);
+        
+        // In a real implementation, you would navigate to the corresponding page
+        // window.location.href = `#${getCardLink(cardTitle)}`;
+      });
+    });
+
+    // Notification bell animation
+    const notificationBell = document.querySelector(".notifications i");
+    notificationBell.addEventListener("click", function() {
+      this.classList.add("shake");
+      setTimeout(() => {
+        this.classList.remove("shake");
+      }, 500);
+    });
+
+    // Add shake animation to CSS
+    const style = document.createElement("style");
+    style.textContent = `
+      .shake {
+        animation: shake 0.5s;
+      }
+      
+      @keyframes shake {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(10deg); }
+        50% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Close dropdown when clicking on dropdown item
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const dropdownContent = item.closest('.dropdown-content');
+        if (dropdownContent && window.innerWidth < 992) {
+          dropdownContent.style.display = 'none';
+        }
+      });
+    });
+
+    fetch('/api/services/snippet')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('services-dynamic').innerHTML = html;
+    });
+
+  </script>
+</body>
+</html>

@@ -5,196 +5,260 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Espace ATS - USTHB</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+  <link rel="stylesheet" type="text/css" href="ats.css">
 
-    body {
-      background-color: #e6ddfb;
-      color: #1a1a2e;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
 
-    header {
-      background-color: #1a1a5e;
-      color: #fff;
-      padding: 1.2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    main {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 5%;
-      flex-wrap: wrap;
-    }
-
-    .illustration-container {
-      position: relative;
-      max-width: 400px;
-      width: 100%;
-      animation: fadeZoomIn 1s ease forwards;
-    }
-
-    .illustration-container::before {
-      content: "";
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      background-color: #2e0854; /* بنفسجي داكن */
-      border-radius: 50%;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 0;
-    }
-
-    .illustration {
-      width: 100%;
-      position: relative;
-      z-index: 1;
-      transition: transform 0.3s ease;
-    }
-
-    .illustration-container:hover .illustration {
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeZoomIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .sidebar {
-      background-color: #f5f4fe;
-      border-radius: 20px;
-      padding: 2rem;
-      width: 260px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    .menu-title {
-      font-weight: 600;
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: #362d7e;
-      text-align: center;
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      padding: 0.8rem 0;
-      color: #1a1a2e;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .menu-item i {
-      margin-right: 10px;
-      color: #7b2cbf;
-    }
-
-    .menu-item span {
-      flex: 1;
-    }
-
-    .menu-item:hover {
-      color: #7b2cbf;
-    }
-
-    .welcome {
-      flex: 1;
-      text-align: center;
-      padding: 0 2rem;
-    }
-
-    .welcome h1 {
-      font-size: 2rem;
-      color: #1a1a2e;
-      margin-bottom: 1rem;
-    }
-
-    .welcome p {
-      color: #555;
-    }
-
-    @media (max-width: 900px) {
-      main {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .sidebar {
-        width: 100%;
-        margin-top: 2rem;
-      }
-
-      .illustration-container {
-        max-width: 300px;
-        margin: 1rem 0;
-      }
-
-      .illustration-container::before {
-        width: 220px;
-        height: 220px;
-      }
-    }
-  </style>
 </head>
 <body>
-
   <header>
-    <div>Espace Numérique de Travail – USTHB</div>
-    <div>ATS</div>
+    <div class="logo-container">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <img src="logo.jpg" alt="Logo USTHB" class="logo" />
+      <span class="university-name">Espace Numérique de Travail – USTHB</span>
+    </div>
+    
+    <div class="header-controls">
+      <button class="theme-toggle" id="toggleTheme" title="Changer le thème">
+        <i class="fas fa-moon"></i>
+      </button>
+      
+      <div class="user-profile">
+        <div class="avatar">A</div>
+        <span>ATS</span>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- رسالة ترحيب على اليسار -->
-    <div class="welcome">
-      <h1>Bienvenue à votre espace ATS</h1>
-      <p>Aucune nouvelle annonce.</p>
-    </div>
-
-
-    <div class="illustration-container">
-      <img src="admin-illustration.png" alt="Responsable administratif" class="illustration" />
-    </div>
-
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
   
-    <div class="sidebar">
-      <div class="menu-title">Menu</div>
-      <a href="#" class="menu-item"><i class="fas fa-user"></i><span>Voir le profil</span></a>
+  <div class="main-container">
+    <div class="sidebar" id="sidebar">
+      <div class="menu-title">Menu Administratif</div>
+      <a href="#" class="menu-item"><i class="fas fa-user"></i><span>Votre Profil</span></a>
       <a href="#" class="menu-item"><i class="fas fa-wifi"></i><span>Compte Wifi</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-folder-open"></i><span>Dossier csf</span></a>
+      <a href="#" class="menu-item active"><i class="fas fa-folder-open"></i><span>Dossier CSF</span></a>
       <a href="#" class="menu-item"><i class="fas fa-database"></i><span>Accès Proquest</span></a>
-      <a href="#" class="menu-item"><i class="fas fa-cogs"></i><span>Techniques de l’ingénieur</span></a>
+      <a href="#" class="menu-item"><i class="fas fa-cogs"></i><span>Techniques de l'ingénieur</span></a>
       <a href="#" class="menu-item"><i class="fas fa-gavel"></i><span>Textes Règlementaires</span></a>
       <a href="#" class="menu-item"><i class="fas fa-flask"></i><span>Stage scientifique</span></a>
       <a href="#" class="menu-item"><i class="fas fa-briefcase"></i><span>Stage de perfectionnement</span></a>
+      
     </div>
-  </main>
 
+    <div class="content-area">
+      <section class="welcome-section">
+        <div class="welcome-accent"></div>
+        <div class="welcome-content">
+          <h1 class="welcome-title">Bienvenue à votre espace ATS</h1>
+          <p class="welcome-subtitle">Gérez vos ressources administratives et accédez à tous les services numériques de l'USTHB.</p>
+        </div>
+        <div class="illustration-container">
+          <img src="admin-illustration.png" alt="Responsable administratif" class="illustration" />
+        </div>
+      </section>
+
+    <!-- Quick Actions -->
+      <div class="news-ticker">
+       
+          <div class="ticker-label">
+            <i class="fas fa-rocket"></i> Quick Actions:
+          </div>
+          
+      </div>
+
+      
+      <div class="quick-actions">
+        <div class="action-card">
+          <div class="action-icon primary">
+            <i class="fas fa-file-upload"></i>
+          </div>
+          <h3 class="action-title">Déposer un document</h3>
+          <p class="action-description">Envoyez vos fichiers pour traitement administratif</p>
+        </div>
+        <div class="action-card">
+          <div class="action-icon success">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3 class="action-title">Prendre rendez-vous</h3>
+          <p class="action-description">Planifiez une rencontre avec un responsable</p>
+        </div>
+        <div class="action-card">
+          <div class="action-icon warning">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <h3 class="action-title">Support technique</h3>
+          <p class="action-description">Obtenez de l'aide pour les problèmes techniques</p>
+        </div>
+        <div class="action-card">
+          <div class="action-icon info">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3 class="action-title">Alertes</h3>
+          <p class="action-description">Configurez vos préférences de notification</p>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-section">
+        <div class="stat-card">
+          <h4 class="stat-title">Dossiers CSF traités</h4>
+          <div class="stat-value">1,248</div>
+          <div class="stat-change up">
+            <i class="fas fa-arrow-up"></i> 12% ce mois-ci
+          </div>
+        </div>
+        <div class="stat-card">
+          <h4 class="stat-title">Demandes en attente</h4>
+          <div class="stat-value">87</div>
+          <div class="stat-change down">
+            <i class="fas fa-arrow-down"></i> 5% depuis hier
+          </div>
+        </div>
+        <div class="stat-card">
+          <h4 class="stat-title">Utilisateurs actifs</h4>
+          <div class="stat-value">432</div>
+          <div class="stat-change up">
+            <i class="fas fa-arrow-up"></i> 8% cette semaine
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements Section -->
+      <section class="announcements">
+        <div class="section-header">
+          <h2 class="section-title">Annonces Récentes</h2>
+          <a href="#" style="color: var(--primary); font-size: 0.9rem;">Voir tout</a>
+        </div>
+        <div class="announcements-content">
+          <div class="announcement-item">
+            <h3 class="announcement-title">
+              Mise à jour des procédures CSF
+              <span class="announcement-badge badge-new">Nouveau</span>
+            </h3>
+            <div class="announcement-date">Publié le 12 mai 2025</div>
+            <p class="announcement-text">
+              Veuillez noter que les procédures de soumission des dossiers CSF ont été mises à jour. Consultez la nouvelle documentation avant de soumettre votre demande.
+            </p>
+          </div>
+          <div class="announcement-item">
+            <h3 class="announcement-title">
+              Maintenance système prévue
+              <span class="announcement-badge badge-important">Important</span>
+            </h3>
+            <div class="announcement-date">Publié le 8 mai 2025</div>
+            <p class="announcement-text">
+              Une maintenance du système est prévue le 20 mai de 20h à minuit. Le service sera indisponible pendant cette période.
+            </p>
+          </div>
+          <div class="announcement-item">
+            <h3 class="announcement-title">
+              Formation aux nouvelles plateformes
+              <span class="announcement-badge badge-info">Information</span>
+            </h3>
+            <div class="announcement-date">Publié le 5 mai 2025</div>
+            <p class="announcement-text">
+              Une session de formation sur les nouvelles fonctionnalités de la plateforme aura lieu le 15 juin. Inscription obligatoire.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Université des Sciences et de la Technologie Houari Boumediene - USTHB
+    <div style="margin-top: 0.5rem; font-size: 0.8rem;">
+      <a href="#" style="color: inherit; margin: 0 0.5rem;">Contact</a> | 
+      <a href="#" style="color: inherit; margin: 0 0.5rem;">Aide</a> | 
+      <a href="#" style="color: inherit; margin: 0 0.5rem;">Confidentialité</a>
+    </div>
+  </footer>
+
+  <script>
+    // Thème sombre/clair
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    function setTheme(theme) {
+      if (theme === "dark") {
+        body.classList.add("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        body.classList.remove("dark");
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = body.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      setTheme(isDark ? "dark" : "light");
+    });
+
+    // Charge le thème sauvegardé
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+
+    // Menu mobile
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    menuToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+      overlay.classList.toggle("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    // Fermer le menu au clic sur un lien (pour mobile)
+    const menuItems = document.querySelectorAll(".menu-item");
+    menuItems.forEach(item => {
+      item.addEventListener("click", () => {
+        if (window.innerWidth <= 900) {
+          sidebar.classList.remove("active");
+          overlay.classList.remove("active");
+        }
+      });
+    });
+
+    // Ajuster le sidebar lors du redimensionnement
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+    });
+
+    // Animation du ticker d'actualités
+    function setupTicker() {
+      const tickerContent = document.querySelector('.ticker-content');
+      const tickerList = document.querySelector('.ticker-list');
+      const tickerItems = document.querySelectorAll('.ticker-item');
+      
+      // Dupliquer les éléments pour un défilement continu
+      tickerItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        tickerList.appendChild(clone);
+      });
+      
+      // Ajuster la vitesse en fonction du contenu
+      const totalWidth = tickerItems.length * 200; // estimation largeur
+      const duration = totalWidth / 30; // 30px par seconde
+      
+      tickerList.style.animationDuration = `${duration}s`;
+    }
+
+    // Démarrer le ticker après le chargement
+    window.addEventListener('load', setupTicker);
+  </script>
 </body>
 </html>
