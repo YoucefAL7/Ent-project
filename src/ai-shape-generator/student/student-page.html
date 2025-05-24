@@ -105,10 +105,29 @@
       gap: 1rem;
     }
 
+    
     .nav-menu {
+      position: relative;
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
     }
+
+/* Ajustement pour le conteneur principal pour éviter que le contenu ne soit caché sous la nav */
+main.container {
+  margin-top: 60px; /* Ajustez cette valeur selon la hauteur de votre nav-menu */
+}
+
+/* Modification des items de nav pour s'adapter à la nouvelle disposition */
+.nav-item {
+  position: relative;
+}
+
+/* Ajustement de la position des dropdowns */
+.dropdown-content {
+  top: calc(100% + 0.5rem);
+}
+
+
 
     .nav-link {
       text-decoration: none;
@@ -411,31 +430,11 @@
     }
 
     .dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-/* عندما يكون هناك كارت واحد فقط */
-.dashboard-grid:has(> :only-child) {
-  grid-template-columns: 1fr;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* عندما يكون هناك كارتين فقط */
-.dashboard-grid:has(> :nth-child(2):last-child) {
-  grid-template-columns: repeat(2, minmax(280px, 1fr));
-}
-
-/* تعديلات للهواتف عندما يكون هناك كارتين */
-@media (max-width: 600px) {
-  .dashboard-grid:has(> :nth-child(2):last-child) {
-    grid-template-columns: 1fr;
-  }
-}
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
 
     .card {
       background-color: var(--card-light);
@@ -535,104 +534,6 @@
       color: #94a3b8;
     }
 
-    .news-section {
-      margin-bottom: 3rem;
-    }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .news-card {
-      background-color: var(--card-light);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-light);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    body.dark .news-card {
-      background-color: var(--card-dark);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .news-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    body.dark .news-card:hover {
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .news-image {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .news-card:hover .news-image {
-      transform: scale(1.02);
-    }
-
-    .news-content {
-      padding: 1.5rem;
-    }
-
-    .news-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--primary);
-      transition: var(--transition);
-    }
-
-    .news-card:hover .news-title {
-      color: var(--accent);
-    }
-
-    .news-excerpt {
-      font-size: 0.95rem;
-      color: #64748b;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    body.dark .news-excerpt {
-      color: #94a3b8;
-    }
-
-    .news-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-
-    body.dark .news-meta {
-      color: #94a3b8;
-    }
-
-    .read-more {
-      color: var(--primary);
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      transition: var(--transition);
-    }
-
-    .read-more:hover {
-      color: var(--accent);
-      gap: 0.5rem;
-    }
 
     .announcements {
       background-color: var(--card-light);
@@ -922,7 +823,104 @@
       .welcome-title {
         font-size: 2rem;
       }
-    }
+    }.entry-form {
+  background-color: var(--card-light);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-light);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+body.dark .entry-form {
+  background-color: var(--card-dark);
+  box-shadow: var(--shadow-dark);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.entry-form h2 {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.entry-form p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+body.dark .entry-form p {
+  color: #94a3b8;
+}
+
+.entry-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.entry-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.entry-form .form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition);
+  background-color: var(--card-light);
+  color: var(--text-light);
+}
+
+body.dark .entry-form .form-control {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+  color: var(--text-dark);
+}
+
+.entry-form .form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.entry-form textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.entry-form .btn-submit {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.entry-form .btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+}
+
+.entry-form .mt-4 {
+  margin-top: 1.5rem;
+}
+
 
     @media (max-width: 576px) {
       .header-container {
@@ -953,21 +951,6 @@
         flex-direction: column;
       }
     }
-
-
-  /*mmmmmmm*/
-    .refresh-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-left: auto;
-    }
   </style>
 </head>
 <body>
@@ -975,7 +958,7 @@
     <div class="header-container">
       <div class="logo-container">
         <img src="logo.png" alt="Logo USTHB" class="logo">
-        <span class="university-name">ENT USTHB</span>
+        <span class="university-name">ENT USTHB - Espace Etudiant</span>
       </div>
       
       <nav class="nav-container">
@@ -987,7 +970,7 @@
           <li class="nav-item">
             <a href="#dashboard" class="nav-link">
               <i class="fas fa-home"></i>
-              Tableau de bord
+              Acceuil
             </a>
           </li>
           <li class="nav-item dropdown">
@@ -1005,21 +988,9 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="#actualites" class="nav-link">
-              <i class="fas fa-newspaper"></i>
-              Actualités
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="#annonces" class="nav-link">
               <i class="fas fa-bullhorn"></i>
               Annonces
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#help" class="nav-link">
-              <i class="fas fa-question-circle"></i>
-              Aide
             </a>
           </li>
         </ul>
@@ -1053,7 +1024,7 @@
     <div class="mobile-nav-links">
       <a href="#dashboard" class="mobile-nav-link">
         <i class="fas fa-home"></i>
-        Tableau de bord
+        Acceuil
       </a>
       
       <a href="#mon-cursus" class="mobile-nav-link">
@@ -1081,19 +1052,9 @@
         Messagerie
       </a>
       
-      <a href="#actualites" class="mobile-nav-link">
-        <i class="fas fa-newspaper"></i>
-        Actualités
-      </a>
-      
       <a href="#annonces" class="mobile-nav-link">
         <i class="fas fa-bullhorn"></i>
         Annonces
-      </a>
-      
-      <a href="#help" class="mobile-nav-link">
-        <i class="fas fa-question-circle"></i>
-        Aide
       </a>
     </div>
     
@@ -1137,50 +1098,11 @@
       <div id="services-dynamic" class="dashboard-grid"></div>
     <!-- سيتم تحميل الخدمات هنا -->
     </section>
+
+
+
+
     
-        
-     
-    <!-- News Section -->
-    <section class="news-section" id="actualites">
-      <h2 class="section-title">Actualités de l'Université</h2>
-      <div class="news-grid">
-        <div class="news-card">
-          <img src="usthb.jfif" alt="Actualité 1" class="news-image">
-          <div class="news-content">
-            <h3 class="news-title">Journée Portes Ouvertes 2025</h3>
-            <p class="news-excerpt">L'USTHB organise sa journée portes ouvertes annuelle le 15 juin 2025. Venez découvrir nos formations et rencontrer nos enseignants.</p>
-            <div class="news-meta">
-              <span>Il y a 2 jours</span>
-              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="news-card">
-          <img src="robot.jfif" alt="Actualité 2" class="news-image">
-          <div class="news-content">
-            <h3 class="news-title">Nouveaux Abonnements EBSCO</h3>
-            <p class="news-excerpt">La bibliothèque universitaire a renouvelé ses abonnements avec plus de 10,000 nouvelles ressources disponibles pour les étudiants.</p>
-            <div class="news-meta">
-              <span>Il y a 5 jours</span>
-              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="news-card">
-          <img src="images.jfif" alt="Actualité 3" class="news-image">
-          <div class="news-content">
-            <h3 class="news-title">Remise des Diplômes 2024</h3>
-            <p class="news-excerpt">La cérémonie de remise des diplômes pour la promotion 2024 aura lieu le 30 juillet dans l'amphithéâtre principal.</p>
-            <div class="news-meta">
-              <span>Il y a 1 semaine</span>
-              <a href="#" class="read-more">Lire plus <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Announcements Section -->
     <section id="announcements">
@@ -1217,6 +1139,49 @@
         </div>
       </div>
     </section>
+    <br>
+
+    <!-- Évaluation d'entrée -->
+<section class="entry-form">
+<h2 class="section-title">
+  <i class="fas fa-clipboard-check"></i>
+  Formulaire de plainte
+</h2>
+<p>Un souci à signaler ? Remplis ce formulaire pour nous faire part de ta plainte ou d’un problème rencontré à l’université. On s’engage à te répondre rapidement et à trouver une solution..</p>
+<form action="#" method="post" class="mt-4">
+  <div class="form-group">
+    <label for="major">Votre filière</label>
+    <select class="form-control" id="major">
+      <option>Informatique</option>
+      <option>Mathématiques</option>
+      <option>Physique</option>
+      <option>Chimie</option>
+      <option>Biologie</option>
+      <option>Génie Civil</option>
+      <option>Électronique</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="major">Liste de plainte</label>
+    <select class="form-control" id="major">
+      <option>problème avec anseignant</option>
+      <option>problème de notes</option>
+      <option>conflit avec un autre Etudiant</option>
+      <option>problème administratif</option>
+      <option>problème lie a la securite</option>
+      <option>Autre(a preciser dans la description)</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="expectations">description</label>
+    <textarea class="form-control" id="expectations" rows="3" placeholder="decriver votre plainte..."></textarea>
+  </div>
+  
+  <button type="submit" class="btn-submit">Soumettre</button>
+</form>
+</section>
   </main>
 
   <footer>
@@ -1235,7 +1200,6 @@
   </div>
 
   <script>
-
     //ia 
     fetch('/api/services/snippet')
   .then(res => res.text())
@@ -1246,6 +1210,9 @@
     document.getElementById('services-dynamic').innerHTML = '<p>Erreur de chargement des services.</p>';
 
   });
+
+
+
 
 
     // Theme Toggle
@@ -1382,9 +1349,12 @@
       });
     });
 
- 
+    fetch('/api/services/snippet')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('services-dynamic').innerHTML = html;
+    });
 
-   
   </script>
 </body>
 </html>
