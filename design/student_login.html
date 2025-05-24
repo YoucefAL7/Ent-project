@@ -29,8 +29,8 @@
             }
             
             .logo {
-                width: 60px;
-                height: 60px;
+                width: 70px;
+                height: 70px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -521,9 +521,9 @@
     </head>
     <body>
         <div class="header">
-            <a href="page_accueil_universite (2).html"><button class="back-button" onclick="history.back()">
+            <button class="back-button" onclick="history.back()">
                 <i class="fas fa-arrow-left"></i>
-            </button></a>
+            </button>
             <div class="logo-title">
                 <div class="logo">
                     <img src="logo.jpg" alt="Logo ENT" />
@@ -547,7 +547,7 @@
                             <label for="chk" aria-hidden="true">Connecter</label>
                             <input type="number" name="number" placeholder="Matricule" min="12" max="12">
                             <input type="password" name="pswd" placeholder="Mot de Passe" required="">
-                            <button><a href="Student.html"></a>Connecter</button>
+                            <button onclick="location.href='student.html'">Connecter</button>
                         </form>
                     </div>
             
@@ -557,7 +557,7 @@
                             <input type="text" name="text" placeholder="Nom Complet" required="">
                             <input type="number" name="number" placeholder="Matricule" min="12" max="12">
                             <input type="password" name="password" placeholder="Mot de Passe" required="">
-                            <button><a href="Student.html"></a>Inscrire</button>
+                            <button onclick="location.href='student.html'">Inscrire</button>
                         </form>
                         
                     </div>
